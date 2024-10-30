@@ -1,94 +1,50 @@
-# Getting Started with the iTwin Viewer Create React App Template
+# Particle Effect - Car
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Copyright © Bentley Systems, Incorporated, © OpenStreetMap contributors. All rights reserved.
 
-## Environment Variables
+This sample shows how to create a particle effect using OpenStreetMaps to populate a network of roads and streets with moving cars.
 
-Prior to running the app, you will need to add OIDC client configuration to the variables in the .env file:
+## Copyright Disclaimer
 
-```
-# ---- Authorization Client Settings ----
-IMJS_AUTH_CLIENT_CLIENT_ID=""
-IMJS_AUTH_CLIENT_REDIRECT_URI=""
-IMJS_AUTH_CLIENT_LOGOUT_URI=""
-IMJS_AUTH_CLIENT_SCOPES =""
-```
+This sample uses the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) distributed and created by [OpenStreetMap](https://www.openstreetmap.org/) (OSM). The data retrieved from this API is made available under the Open Database License.
 
-- You can generate a [test client](https://developer.bentley.com/tutorials/web-application-quick-start/#3-register-an-application) to get started.
+For more information about OSM and licensing, see their [licensing page](https://www.openstreetmap.org/copyright).
 
-- Scopes expected by the viewer are:
+Map tiles are also pulled from OpenStreetMap. Find more information about OSM map tiles [here](https://wiki.openstreetmap.org/wiki/Tiles).
 
-  - **Visualization**: `imodelaccess:read`
-  - **iModels**: `imodels:read`
-  - **Reality Data**: `realitydata:read`
+Additionally, the car images in this sample come from [OpenClipArt](https://openclipart.org/share) and are in the public domain.
 
-- The application will use the path of the redirect URI to handle the redirection, it must simply match what is defined in your client.
+## Purpose
 
-- When you are ready to build a production application, [register here](https://developer.bentley.com/register/).
+The purpose of this sample is to demonstrate the following:
 
-You should also add a valid iTwinId and iModelId for your user in the this file:
+* Working with an external API to generate particles for a decorator
+* Creating a decorator and rendering it in the active view.
+* Visualizing cars moving along a network of roads.
 
-```
-# ---- Test ids ----
-IMJS_ITWIN_ID = ""
-IMJS_IMODEL_ID = ""
-```
+## Description
 
-- For the IMJS_ITWIN_ID variable, you can use the id of one of your existing iTwins. You can obtain their ids via the [iTwin REST APIs](https://developer.bentley.com/apis/itwins/operations/get-itwin/).
+In this sample, particles move along a complex road network created from OpenStreetMap data. This road network is generated using two methods from the [OverpassApi](./open-street-map/OverpassApi.ts) class. The first method requests OSM street data within the bounds of the viewport and constructs streets and intersections. The second rebuilds the existing network with a new driving direction. Note: there should only be one instance of OverpassApi data in the app.
 
-- For the IMJS_IMODEL_ID variable, use the id of an iModel that belongs to the iTwin that you specified in the IMJS_ITWIN_ID variable. You can obtain iModel ids via the [iModel REST APIs](https://developer.bentley.com/apis/imodels-v2/operations/get-imodel-details/).
+These particles are built and rendered using the [Decorator](https://www.itwinjs.org/reference/core-frontend/views/decorator/) and [ParticleCollectionBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/particlecollectionbuilder/) interfaces. The `decorate` method in the decorator updates the location and directions of existing particles and adds them to a new `ParticleCollectionBuilder`. Then it uses a [GraphicBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/graphicbuilder/) to draw a rectangle around the area that may contain particles. Lastly, this method adds the [RenderGraphics](https://www.itwinjs.org/reference/core-frontend/rendering/rendergraphic/) produced by these builders to the [DecorateContext](https://www.itwinjs.org/reference/core-frontend/rendering/decoratecontext) so that they are rendered.
 
-- Alternatively, you can [generate a test iModel](https://developer.bentley.com/tutorials/web-application-quick-start/#4-create-an-imodel) to get started without an existing iModel.
+To help with memory management, particle textures are owned by the decorator, which contains a `dispose()` method that needs to be called before a decorator is destroyed.
 
-- If at any time you wish to change the iModel that you are viewing, you can change the values of the iTwinId or iModelId query parameters in the url (i.e. localhost:3000?iTwinId=myNewITwinId&iModelId=myNewIModelId)
+The `createDecorator` method in [CarDecorationApi.ts]("./CarDecorationApi.ts") is responsible for disposing the existing car decorator and creating a new decorator. It adds an event listener to the [Viewport.onRender](https://www.itwinjs.org/reference/core-frontend/views/viewport/?term=onrender#onrender) method to re-render the decorator on every frame and passes the new decorator to the [ViewManager.addDecorator](https://www.itwinjs.org/reference/core-frontend/views/viewmanager/adddecorator/) method to have it rendered in all active views. Note that this method updates `CarDecorationApi.dispose()` to be tied to the new decorator.
 
-## Available Scripts
+## Additional Resources
 
-In the project directory, you can run:
+For more examples of decorators, see these samples:
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* [Heatmap Decorator Sample](../Heatmap%20Decorator/readme.md)
+* [Particle Effect (Snow & Rain)](../Snow%20and%20Rain%20Particle%20Effect/readme.md)
+* [Fire Particle Effect](../Fire%20Particle%20Effect/readme.md)
+* [Street Network Decorator](../Street%20Network%20Decorator/readme.md)
 
 ## Notes
 
-If you are not using NPM, remove the `USING_NPM` env var from [.env](./.env)
-
-## Next Steps
-
-- [iTwin Viewer options](https://www.npmjs.com/package/@itwin/web-viewer-react)
-
-- [Extending the iTwin Viewer](https://developer.bentley.com/tutorials/itwin-viewer-hello-world/)
-
-- [Using the iTwin Platform](https://developer.bentley.com/)
-
-- [iTwin Developer Program](https://www.youtube.com/playlist?list=PL6YCKeNfXXd_dXq4u9vtSFfsP3OTVcL8N)
+* This is not a true traffic simulation. Cars can run over each other, and this is not a bug.
+* Updating street data re-queries OSM with the current extents of the viewport and creates a new decorator with the results. A red box is drawn around the new area that contains street data.
+* Changing car density provides a way to modify the number of particles. This number comes from the total distance available on each street and the density value. To mitigate performance issues, the number of cars maxes out at 9000.
+* Switching between the left side and right side determines which side of the street cars drive on. Note that OSM will return some major streets (like highways and interstates) as two separate streets instead of a single street. This toggle won't change the driving direction of such streets
+* When in `streets only` mode, the background map is set to the OpenStreetMap street view map, otherwise it's set to Bing's hybrid map.
