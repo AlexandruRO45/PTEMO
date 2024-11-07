@@ -3,7 +3,6 @@
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
 import {
-  BingLocationProvider,
   IModelApp,
   IModelConnection,
   queryTerrainElevationOffset,
@@ -26,6 +25,7 @@ import { Range3d, Transform, Vector2d } from "@itwin/core-geometry";
 import {
   BackgroundMapType,
   BaseMapLayerSettings,
+  Cartographic,
   DisplayStyle3dProps,
   GlobeMode,
   SpatialViewDefinitionProps
@@ -58,18 +58,10 @@ export default class CarDecorationApi {
   ];
 
   /** Used by `travelTo` to find a destination given a name */
-  private static _locationProvider?: BingLocationProvider;
+  private static _locationProviderUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places`;
 
   /** Used to determine how far out to search - this is in meters and is slightly less than 50 miles */
   public static readonly maxQueryDistance = 50000;
-
-  /** Provides conversion from a place name to a location on the Earth's surface. */
-  public static get locationProvider(): BingLocationProvider {
-    return (
-      this._locationProvider ||
-      (this._locationProvider = new BingLocationProvider())
-    );
-  }
 
   /** Given a place name - whether a specific address or a more freeform description like "New Zealand", "Ol' Faithful", etc -
    * look up its location on the Earth and, if found, use a flyover animation to make the viewport display that location.
@@ -81,44 +73,46 @@ export default class CarDecorationApi {
     if (!viewport.view.is3d()) return false;
 
     // Obtain latitude and longitude.
-    const location = await this.locationProvider.getLocation(destination);
+    const location = await CarDecorationApi.getLocationFromMapbox(destination);
     if (!location) return false;
 
     // Determine the height of the Earth's surface at this location.
-    const elevationOffset = await queryTerrainElevationOffset(
-      viewport,
-      location.center
-    );
-    if (elevationOffset !== undefined) location.center.height = elevationOffset;
+    const cartographicLocation = Cartographic.fromDegrees({
+      longitude: location.center.lon,
+      latitude: location.center.lat,
+    });
+
+    const elevationOffset = await queryTerrainElevationOffset(viewport, cartographicLocation);
+    if (elevationOffset !== undefined) cartographicLocation.height = elevationOffset;
 
     // Move the viewport to the location.
-    let viewArea: Range3d;
-    if (location.area) {
-      const northeastPoint = viewport.view.cartographicToRoot(
-        location.area.northeast
-      );
-      const southwestPoint = viewport.view.cartographicToRoot(
-        location.area.southwest
-      );
+    const center = viewport.view.cartographicToRoot(cartographicLocation);
+    if (!center) return false;
 
-      if (!northeastPoint || !southwestPoint) return false;
+    const offset = 500; // 500-meter radius for view bounds
+    const corner1 = Transform.createTranslationXYZ(offset, offset, offset).multiplyPoint3d(center);
+    const corner2 = Transform.createTranslationXYZ(-offset, -offset, -offset).multiplyPoint3d(center);
 
-      viewArea = Range3d.create(northeastPoint, southwestPoint);
-    } else {
-      // area doesn't exist so create view bounds with a radius of 100 meters
-      const center = viewport.view.cartographicToRoot(location.center);
-      if (!center) return false;
-
-      let transformation = Transform.createTranslationXYZ(100, 100, 100);
-      const corner1 = transformation.multiplyPoint3d(center);
-      transformation = Transform.createTranslationXYZ(-100, -100, -100);
-      const corner2 = transformation.multiplyPoint3d(center);
-
-      viewArea = Range3d.create(corner1, corner2);
-    }
-
+    const viewArea = Range3d.create(corner1, corner2);
     viewport.zoomToVolume(viewArea);
+
     return true;
+  }
+
+  /** Retrieves the geographical location (latitude and longitude) of a given destination using the Mapbox API. */
+  private static async getLocationFromMapbox(destination: string): Promise<{ center: { lat: number, lon: number } }> {
+    const accessToken = process.env.IMJS_MAP_BOX_KEY || "";
+    const url = `${this._locationProviderUrl}/${encodeURIComponent(destination)}.json?access_token=${accessToken}`;
+    const response = await fetch(url);
+    if (!response.ok)
+      return { center: { lat: 0, lon: 0 } };
+
+    const data = await response.json();
+    if (!data.features || data.features.length === 0)
+      return { center: { lat: 0, lon: 0 } };
+
+    const [lon, lat] = data.features[0].geometry.coordinates;
+    return { center: { lat, lon } };
   }
 
   /** Changes the background map between using open street map street view and bing hybrid view */

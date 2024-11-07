@@ -11,6 +11,7 @@ import {
   Input,
   Label,
   LabeledSelect,
+  ProgressRadial,
   SelectOption,
   Text,
   toaster,
@@ -26,7 +27,6 @@ import {
   Widget,
   WidgetState
 } from "@itwin/appui-react";
-import { LoadingSpinner } from "@itwin/core-react";
 import "./CarDecoration.scss";
 import { SvgHelpCircularHollow } from "@itwin/itwinui-icons-react";
 import { Viewport } from "@itwin/core-frontend";
@@ -186,7 +186,7 @@ const CarDecorationWidget = () => {
             disabled={isLoading || isCreatingRoads || !allowQuery}
           >
             {isLoading || isCreatingRoads ? (
-              <LoadingSpinner />
+              <ProgressRadial />
             ) : (
               "Update Street Data"
             )}
