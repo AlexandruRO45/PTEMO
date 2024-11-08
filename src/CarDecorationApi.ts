@@ -11,16 +11,6 @@ import {
   Viewport
 } from "@itwin/core-frontend";
 import { CarDecorator } from "./CarDecorator";
-// UNSUPORTED: The following imports are not supported in the browser, use PUBLIC PATH URL instead
-// import darkblue from ".darkblue.png";
-// import green from ".green.png";
-// import lime from ".lime.png";
-// import magenta from ".magenta.png";
-// import orange from ".orange.png";
-// import purple from ".purple.png";
-// import red from ".red.png";
-// import teal from ".teal.png";
-// import white from "../public/white.png";
 import { Range3d, Transform, Vector2d } from "@itwin/core-geometry";
 import {
   BackgroundMapType,
@@ -46,15 +36,6 @@ export default class CarDecorationApi {
     `${process.env.PUBLIC_URL}/truck2.png`,
     `${process.env.PUBLIC_URL}/truck3.png`,
     // `${process.env.PUBLIC_URL}/darkblue.png`,
-    // `${process.env.PUBLIC_URL}/green.png`,
-    // `${process.env.PUBLIC_URL}/lime.png`,
-    // `${process.env.PUBLIC_URL}/magenta.png`,
-    // `${process.env.PUBLIC_URL}/orange.png`,
-    // `${process.env.PUBLIC_URL}/purple.png`,
-    // `${process.env.PUBLIC_URL}/red.png`,
-    // `${process.env.PUBLIC_URL}/teal.png`,
-    // `${process.env.PUBLIC_URL}/white.png`,
-
   ];
 
   /** Used by `travelTo` to find a destination given a name */
