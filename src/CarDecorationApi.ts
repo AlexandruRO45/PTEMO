@@ -222,8 +222,8 @@ export default class CarDecorationApi {
       isPrivate: false,
       description: "",
       cameraOn: false,
-      origin: [-11941629.925858043, 4777112.235469295, 44102.77093490586],
-      extents: [1312.179818775386, 2143.3449330940266, 1410.4581301882986],
+      origin: [-11379899.995, 6483512.235, 54102.77],
+      extents: [2312.179818775386, 2543.3449330940266, 1410.4581301882986],
       angles: {},
       camera: {
         lens: 0,

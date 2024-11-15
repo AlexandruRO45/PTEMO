@@ -1,18 +1,4 @@
-# Particle Effect - Car
-
-Copyright © Bentley Systems, Incorporated, © OpenStreetMap contributors. All rights reserved.
-
-This sample shows how to create a particle effect using OpenStreetMaps to populate a network of roads and streets with moving cars.
-
-## Copyright Disclaimer
-
-This sample uses the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) distributed and created by [OpenStreetMap](https://www.openstreetmap.org/) (OSM). The data retrieved from this API is made available under the Open Database License.
-
-For more information about OSM and licensing, see their [licensing page](https://www.openstreetmap.org/copyright).
-
-Map tiles are also pulled from OpenStreetMap. Find more information about OSM map tiles [here](https://wiki.openstreetmap.org/wiki/Tiles).
-
-Additionally, the car images in this sample come from [OpenClipArt](https://openclipart.org/share) and are in the public domain.
+# Port Traffic Emissions Management and Optimization (PTEMO) - Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform
 
 ## Purpose
 
@@ -48,3 +34,17 @@ For more examples of decorators, see these samples:
 * Changing car density provides a way to modify the number of particles. This number comes from the total distance available on each street and the density value. To mitigate performance issues, the number of cars maxes out at 9000.
 * Switching between the left side and right side determines which side of the street cars drive on. Note that OSM will return some major streets (like highways and interstates) as two separate streets instead of a single street. This toggle won't change the driving direction of such streets
 * When in `streets only` mode, the background map is set to the OpenStreetMap street view map, otherwise it's set to Bing's hybrid map.
+
+## Copyright Disclaimer
+
+Copyright © Bentley Systems, Incorporated, © OpenStreetMap contributors. Particle Effect - Car. All rights reserved.
+
+This sample shows how to create a particle effect using OpenStreetMaps to populate a network of roads and streets with moving cars.
+
+This sample uses the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) distributed and created by [OpenStreetMap](https://www.openstreetmap.org/) (OSM). The data retrieved from this API is made available under the Open Database License.
+
+For more information about OSM and licensing, see their [licensing page](https://www.openstreetmap.org/copyright).
+
+Map tiles are also pulled from OpenStreetMap. Find more information about OSM map tiles [here](https://wiki.openstreetmap.org/wiki/Tiles).
+
+Additionally, the truck images in this sample come from [Istock Photo](https://www.istockphoto.com/search/more-like-this/1415230916?assettype=image%2Cfilm&mediatype=illustration&phrase=truck%20top%20view) and are in the public domain.
