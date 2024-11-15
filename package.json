@@ -59,7 +59,7 @@
     "typescript": "~5.0.2"
   },
   "scripts": {
-    "start": "BROWSER=none react-scripts --max_old_space_size=4096 start & sleep 5 && firefox-developer-edition http://localhost:3000",
+    "start": "BROWSER=none react-scripts --max_old_space_size=4096 start & sleep 5 && firefox-devedition http://localhost:3000",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts --max_old_space_size=4096 test --passWithNoTests",
     "eject": "react-scripts eject"

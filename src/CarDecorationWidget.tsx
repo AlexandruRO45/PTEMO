@@ -39,7 +39,7 @@ const densityStates: SelectOption<Density>[] = [
   { value: "High", label: "High" },
 ];
 
-const CarDecorationWidget = () => {
+export const CarDecorationWidget = () => {
   const viewport = useActiveViewport();
 
   /** True when performing API query */

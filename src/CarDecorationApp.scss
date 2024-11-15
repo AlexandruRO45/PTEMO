@@ -1,0 +1,61 @@
+.wrapper {
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    grid-template-areas:
+        "header header"
+        "maincontent maincontent";
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    min-height: 100%;
+    min-width: fit-content;
+    gap: 10px;
+    margin: 1rem;
+}
+
+.app-ui {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    min-height: 100%;
+    min-width: fit-content;
+    grid-area: maincontent
+}
+
+.team-banner {
+    display: inline-flex;
+    width: 765px;
+    height: 142px;
+    grid-area: header;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.team-banner img {
+    width: 20%;
+    height: 100%;
+}
+
+.team-banner .header {
+    font-size: 4rem;
+}
+
+.game-details {
+    padding: 15px;
+}
+
+.model-view {
+    height: 50%;
+}
+
+.custom-alert {
+    margin-top: 10px;
+    filter: brightness(0.9);
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
