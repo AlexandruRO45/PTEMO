@@ -30,7 +30,7 @@
     "@itwin/imodels-client-management": "^4.2.3",
     "@itwin/insights-client": "^0.6.0",
     "@itwin/itwinui-icons-react": "^2.8.0",
-    "@itwin/itwinui-react": "^2.12.23",
+    "@itwin/itwinui-react": "^2.12.26",
     "@itwin/map-layers": "^5.3.1",
     "@itwin/map-layers-auth": "^4.4.2",
     "@itwin/map-layers-formats": "^4.4.2",
@@ -51,6 +51,7 @@
     "@types/react": "^17.0.9",
     "@types/react-dom": "^17.0.9",
     "history": "^5.3.0",
+    "proj4": "^2.14.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.0",
@@ -58,7 +59,7 @@
     "typescript": "~5.0.2"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
+    "start": "BROWSER=none react-scripts --max_old_space_size=4096 start & sleep 5 && firefox-developer-edition http://localhost:3000",
     "build": "react-scripts --max_old_space_size=4096 build",
     "test": "react-scripts --max_old_space_size=4096 test --passWithNoTests",
     "eject": "react-scripts eject"
@@ -78,5 +79,9 @@
     "last 4 edge version",
     "not dead",
     "not <0.2%"
-  ]
+  ],
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/proj4": "^2.5.5"
+  }
 }
