@@ -278,7 +278,7 @@ export class CarDecorationWidgetProvider implements UiItemsProvider {
       widgets.push({
         id: "CarDecorationWidget",
         label: "Car Decoration Selector",
-        defaultState: WidgetState.Open,
+        defaultState: WidgetState.Closed,
         // eslint-disable-next-line react/display-name
         content: <CarDecorationWidget />,
       });

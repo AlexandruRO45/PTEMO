@@ -7,18 +7,22 @@ import { Viewer, ViewerViewportControlOptions } from "@itwin/web-viewer-react";
 import { UiFramework, UiItemsProvider } from "@itwin/appui-react";
 import {
   ThemeProvider,
-  Surface,
+  // Surface,
   Text,
   ProgressRadial,
-  Alert,
+  // Alert,
   ThemeType,
 } from "@itwin/itwinui-react";
-import { CarDecorationWidget, CarDecorationWidgetProvider } from "./CarDecorationWidget";
+import { CarDecorationWidgetProvider } from "./CarDecorationWidget";
 import CarDecorationApi from "./CarDecorationApi";
 import { IModelApp } from "@itwin/core-frontend";
 import { authClient } from "./common/AuthorizationClient";
 import { mapLayerOptions } from "./common/MapLayerOptions";
+import { VehicleTrackingPanel } from "./VehicleTrackingPanel";
+import { EmissionsDashboard } from "./EmissionsDashboard";
+import { DataAnalyticsTools } from "./DataAnalyticsTools";
 import "./CarDecorationApp.scss";
+
 
 const uiProviders: UiItemsProvider[] = [new CarDecorationWidgetProvider()];
 
@@ -44,7 +48,7 @@ const viewportOptions: ViewerViewportControlOptions = {
 const iTwinId = process.env.IMJS_ITWIN_ID;
 const iModelId = process.env.IMJS_IMODEL_ID;
 const theme = (process.env.THEME ?? "dark") as ThemeType;
-// const logo = [`${process.env.PUBLIC_URL}/truck.png`];
+const logo = `${process.env.PUBLIC_URL}/logo.svg`;
 
 
 const CarDecorationApp = () => {
@@ -60,25 +64,24 @@ const CarDecorationApp = () => {
   return (
     <ThemeProvider theme={theme}>
       <div className="wrapper">
-        <Surface className="team-banner">
-          {/* <img src={logo} alt="Logo" /> */}
-          <Text variant="headline" className="header">
-            YOUR APPLICATION NAME
-          </Text>
-        </Surface>
-        <div className="app-ui">
+        <header className="header">
+          <img src={logo} alt="Logo" style={{ height: "40px", marginRight: "16px" }} />
+          <Text variant="headline">Port Traffic Simulation</Text>
+        </header>
+        <div className="content">
           {iModelConnected ? (
-            <Surface className="details">
-              <Text variant="leading">Welcome to the Car Decoration App!</Text>
-              {/* Your custom components or content */}
-              {<CarDecorationWidget />}
-            </Surface>
+            <aside className="sidebar">
+              <VehicleTrackingPanel />
+              <EmissionsDashboard />
+              <DataAnalyticsTools />
+              {/* Include other components as needed */}
+            </aside>
           ) : (
-            <Surface className="spinner">
-              <ProgressRadial indeterminate={true} size="large" />
-            </Surface>
+            <div className="spinner">
+              <ProgressRadial indeterminate size="large" />
+            </div>
           )}
-          <div className="model-view">
+          <main className="map-viewer">
             <Viewer
               iTwinId={iTwinId ?? ""}
               iModelId={iModelId ?? ""}
@@ -95,11 +98,16 @@ const CarDecorationApp = () => {
               theme={theme}
               onIModelConnected={() => setIModelConnected(true)}
             />
-            <Alert type="informational" className="custom-alert">
-              Your custom alert message
-            </Alert>
-          </div>
+            {/* Real-Time Alerts */}
+            {/* <Alert type="informational" className="custom-alert">
+              Real-time traffic updates will appear here.
+            </Alert> */}
+          </main>
         </div>
+        <footer className="footer">
+          <Text variant="small">© 2023 Your Company Name</Text>
+          {/* Links to User Guide and Help Section */}
+        </footer>
       </div>
     </ThemeProvider>
   );
