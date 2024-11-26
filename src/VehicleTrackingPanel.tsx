@@ -1,129 +1,84 @@
-// VehicleTrackingPanel.tsx
-import React, { useEffect, useState } from 'react';
-import { List, ListItem, Text, Modal } from "@itwin/itwinui-react";
+import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Download, Pause, Play } from 'lucide-react';
 import './VehicleTrackingPanel.scss';
 
-// Define the Vehicle interface
 interface Vehicle {
     id: string;
     type: string;
-    entryTime: string; // ISO string
-    idleTime: number; // in minutes
-    movementState: 'idle' | 'moving' | 'waiting';
-    waitingTime: number; // in minutes
-    emissionsData: number; // e.g., CO2 emissions in kg
+    location: string;
+    status: string;
+    idleTime: string;
+    emissions: string;
 }
 
-// The VehicleTrackingPanel component
-export const VehicleTrackingPanel = () => {
-    const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+const mockVehicles: Vehicle[] = [
+    { id: 'V001', type: 'Truck', location: 'Zone A', status: 'Moving', idleTime: '00:05:00', emissions: '2.5 kg CO2' },
+    { id: 'V002', type: 'Car', location: 'Zone B', status: 'Idle', idleTime: '00:10:00', emissions: '0.8 kg CO2' },
+    { id: 'V003', type: 'Truck', location: 'Zone C', status: 'Loading', idleTime: '00:20:00', emissions: '3.2 kg CO2' },
+];
+
+export function VehicleTrackingPanel() {
     const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
+    const [updateFrequency, setUpdateFrequency] = useState('1'); // Update default value here
+    const [isUpdating, setIsUpdating] = useState(true);
 
-    // Simulate fetching vehicle data and real-time updates
-    useEffect(() => {
-        // Initial fetch or subscription to vehicle data
-        const fetchVehicles = async () => {
-            // Replace this with actual data fetching logic
-            const initialVehicles: Vehicle[] = [
-                {
-                    id: 'TRUCK-001',
-                    type: 'Truck',
-                    entryTime: new Date().toISOString(),
-                    idleTime: 0,
-                    movementState: 'moving',
-                    waitingTime: 0,
-                    emissionsData: 0.0,
-                },
-                {
-                    id: 'VESSEL-042',
-                    type: 'Vessel',
-                    entryTime: new Date().toISOString(),
-                    idleTime: 0,
-                    movementState: 'idle',
-                    waitingTime: 5,
-                    emissionsData: 1.2,
-                },
-                // Add more vehicles as needed
-            ];
-            setVehicles(initialVehicles);
-        };
-
-        fetchVehicles();
-
-        // Simulate real-time updates
-        const interval = setInterval(() => {
-            setVehicles((prevVehicles) =>
-                prevVehicles.map((vehicle) => {
-                    // Simulate updates to the vehicle data
-                    const updatedVehicle = { ...vehicle };
-
-                    // Update idleTime, waitingTime, emissionsData
-                    if (vehicle.movementState === 'idle') {
-                        updatedVehicle.idleTime += 0.1; // Increment idle time
-                        updatedVehicle.emissionsData += 0.05; // Increment emissions
-                    } else if (vehicle.movementState === 'waiting') {
-                        updatedVehicle.waitingTime += 0.1; // Increment waiting time
-                    }
-
-                    // Randomly change movement state for simulation
-                    const states: Vehicle['movementState'][] = ['idle', 'moving', 'waiting'];
-                    updatedVehicle.movementState = states[Math.floor(Math.random() * states.length)];
-
-                    return updatedVehicle;
-                })
-            );
-        }, 10000); // Update every 10 seconds
-
-        return () => clearInterval(interval);
-    }, []);
-
-    // Handle click on a vehicle to view detailed metrics
-    const handleVehicleClick = (vehicle: Vehicle) => {
-        setSelectedVehicle(vehicle);
+    const handleExport = () => {
+        // In a real application, this would trigger the data export process
+        console.log('Exporting vehicle data...');
     };
 
-    // Close the modal
-    const closeModal = () => {
-        setSelectedVehicle(null);
+    const toggleUpdates = () => {
+        setIsUpdating(!isUpdating);
+        // In a real application, this would start/stop real-time updates
     };
 
     return (
-        <div className="vehicle-tracking-panel">
-            <Text variant="title">Vehicle Tracking</Text>
-            <List>
-                {vehicles.map((vehicle) => (
-                    <ListItem key={vehicle.id} onClick={() => handleVehicleClick(vehicle)}>
-                        <div className="vehicle-item">
-                            <Text><strong>ID:</strong> {vehicle.id}</Text>
-                            <Text><strong>Type:</strong> {vehicle.type}</Text>
-                            <Text><strong>Status:</strong> {vehicle.movementState}</Text>
-                        </div>
-                    </ListItem>
-                ))}
-            </List>
-
-            {/* Vehicle Details Modal */}
-            {selectedVehicle && (
-                <Modal
-                    title={`Vehicle Details - ${selectedVehicle.id}`}
-                    isOpen={true}
-                    onClose={closeModal}
-                    closeOnEsc
-                >
-                    <div className="vehicle-details">
-                        <Text><strong>Type:</strong> {selectedVehicle.type}</Text>
-                        <Text>
-                            <strong>Entry Time:</strong> {new Date(selectedVehicle.entryTime).toLocaleString()}
-                        </Text>
-                        <Text><strong>Movement State:</strong> {selectedVehicle.movementState}</Text>
-                        <Text><strong>Idle Time:</strong> {selectedVehicle.idleTime.toFixed(1)} mins</Text>
-                        <Text><strong>Waiting Time:</strong> {selectedVehicle.waitingTime.toFixed(1)} mins</Text>
-                        <Text>
-                            <strong>Emissions Data:</strong> {selectedVehicle.emissionsData.toFixed(2)} kg CO₂
-                        </Text>
-                    </div>
-                </Modal>
-            )}
-        </div>
+        <Card className="w-full">
+            <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>Vehicle Tracking</CardTitle>
+                <div className="flex space-x-2">
+                    <Select value={updateFrequency} onValueChange={setUpdateFrequency}>
+                        <SelectTrigger className="w-[120px]">
+                            <SelectValue placeholder="Update every" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="1">1 second</SelectItem> {/* Added new item here */}
+                            <SelectItem value="5">5 seconds</SelectItem>
+                            <SelectItem value="10">10 seconds</SelectItem>
+                            <SelectItem value="30">30 seconds</SelectItem>
+                            <SelectItem value="60">1 minute</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <Button variant="outline" size="icon" onClick={toggleUpdates}>
+                        {isUpdating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                    </Button>
+                    <Button variant="outline" size="icon" onClick={handleExport}>
+                        <Download className="h-4 w-4" />
+                    </Button>
+                </div>
+            </CardHeader>
+            <CardContent>
+                <div className="space-y-4">
+                    {mockVehicles.map((vehicle) => (
+                        <Card key={vehicle.id} className="p-4 hover:bg-gray-100 cursor-pointer" onClick={() => setSelectedVehicle(vehicle)}>
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <h3 className="font-bold">{vehicle.id} - {vehicle.type}</h3>
+                                    <p className="text-sm text-gray-500">{vehicle.location} - {vehicle.status}</p>
+                                </div>
+                                <div className="text-right">
+                                    <p className="text-sm">Idle: {vehicle.idleTime}</p>
+                                    <p className="text-sm">Emissions: {vehicle.emissions}</p>
+                                </div>
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </CardContent>
+        </Card>
     );
-};
+}
+
