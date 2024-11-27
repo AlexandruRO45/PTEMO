@@ -39,7 +39,7 @@ const densityStates: SelectOption<Density>[] = [
   { value: "High", label: "High" },
 ];
 
-const CarDecorationWidget = () => {
+export const CarDecorationWidget = () => {
   const viewport = useActiveViewport();
 
   /** True when performing API query */
@@ -278,7 +278,7 @@ export class CarDecorationWidgetProvider implements UiItemsProvider {
       widgets.push({
         id: "CarDecorationWidget",
         label: "Car Decoration Selector",
-        defaultState: WidgetState.Open,
+        defaultState: WidgetState.Closed,
         // eslint-disable-next-line react/display-name
         content: <CarDecorationWidget />,
       });
