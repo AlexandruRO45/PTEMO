@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts';
-// import './EmissionsDashboard.scss';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const emissionsData = [
   { time: '00:00', total: 100, idle: 20, trucks: 70, cars: 30 },
@@ -18,14 +16,14 @@ export function EmissionsDashboard() {
   const [timeframe, setTimeframe] = useState('today');
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-[#3b3a5b] text-white">
       <CardHeader>
-        <CardTitle>Emissions Dashboard</CardTitle>
+        <CardTitle className="text-2xl font-bold">Emissions Dashboard</CardTitle>
         <Select value={timeframe} onValueChange={setTimeframe}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[180px] bg-[#2c2a4e] text-white border-[#68599f]">
             <SelectValue placeholder="Select timeframe" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="bg-[#2c2a4e] text-white">
             <SelectItem value="today">Today</SelectItem>
             <SelectItem value="week">This Week</SelectItem>
             <SelectItem value="month">This Month</SelectItem>
@@ -33,50 +31,49 @@ export function EmissionsDashboard() {
         </Select>
       </CardHeader>
       <CardContent>
-        <ChartContainer
-          config={{
-            total: {
-              label: "Total Emissions",
-              color: "hsl(var(--chart-1))",
-            },
-            idle: {
-              label: "Idle Emissions",
-              color: "hsl(var(--chart-2))",
-            },
-            trucks: {
-              label: "Truck Emissions",
-              color: "hsl(var(--chart-3))",
-            },
-            cars: {
-              label: "Car Emissions",
-              color: "hsl(var(--chart-4))",
-            },
-          }}
-          className="h-[200px]"
-        >
+        <div className="h-[300px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={emissionsData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="time" />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent />} />
-              <Area type="monotone" dataKey="total" stackId="1" stroke="var(--color-total)" fill="var(--color-total)" />
-              <Area type="monotone" dataKey="idle" stackId="2" stroke="var(--color-idle)" fill="var(--color-idle)" />
-              <Area type="monotone" dataKey="trucks" stackId="3" stroke="var(--color-trucks)" fill="var(--color-trucks)" />
-              <Area type="monotone" dataKey="cars" stackId="3" stroke="var(--color-cars)" fill="var(--color-cars)" />
+              <defs>
+                <linearGradient id="colorTotal" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorIdle" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorTrucks" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#ffc658" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#ffc658" stopOpacity={0} />
+                </linearGradient>
+                <linearGradient id="colorCars" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#ff8042" stopOpacity={0.8} />
+                  <stop offset="95%" stopColor="#ff8042" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#4b4a6b" />
+              <XAxis dataKey="time" stroke="#ffffff" />
+              <YAxis stroke="#ffffff" />
+              <Tooltip contentStyle={{ backgroundColor: '#2c2a4e', border: 'none', borderRadius: '8px' }} />
+              <Legend />
+              <Area type="monotone" dataKey="total" stroke="#8884d8" fillOpacity={1} fill="url(#colorTotal)" />
+              <Area type="monotone" dataKey="idle" stroke="#82ca9d" fillOpacity={1} fill="url(#colorIdle)" />
+              <Area type="monotone" dataKey="trucks" stroke="#ffc658" fillOpacity={1} fill="url(#colorTrucks)" />
+              <Area type="monotone" dataKey="cars" stroke="#ff8042" fillOpacity={1} fill="url(#colorCars)" />
             </AreaChart>
           </ResponsiveContainer>
-        </ChartContainer>
+        </div>
         <div className="mt-4 grid grid-cols-2 gap-4">
-          <div>
-            <h3 className="text-sm font-medium">Total Emissions</h3>
+          <div className="bg-[#2c2a4e] p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-[#68599f]">Total Emissions</h3>
             <p className="text-2xl font-bold">1500 kg CO2</p>
-            <p className="text-sm text-muted-foreground">+5% from yesterday</p>
+            <p className="text-sm text-[#82ca9d]">+5% from yesterday</p>
           </div>
-          <div>
-            <h3 className="text-sm font-medium">Idle Emissions</h3>
+          <div className="bg-[#2c2a4e] p-4 rounded-lg">
+            <h3 className="text-sm font-medium text-[#68599f]">Idle Emissions</h3>
             <p className="text-2xl font-bold">470 kg CO2</p>
-            <p className="text-sm text-muted-foreground">+12% from yesterday</p>
+            <p className="text-sm text-[#ff8042]">+12% from yesterday</p>
           </div>
         </div>
       </CardContent>

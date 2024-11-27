@@ -74,53 +74,56 @@ const CarDecorationApp = () => {
   };
 
   return (
-    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <header className="bg-primary text-white p-4 flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
-        <Button
-          variant="secondary"
-          onClick={() => setShowUserGuide(!showUserGuide)}
-          className="bg-white text-primary hover:bg-gray-100"
-        >
-          Help
-        </Button>
-      </header>
-      <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
-        <div className="lg:w-3/4 p-4 flex flex-col overflow-auto">
-          <InteractiveMap />
-          <div className="mt-4">
-            <DataAnalytics />
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className="min-h-screen bg-[#3b3a5b] text-white flex flex-col">
+        <header className="bg-[#68599f] text-white p-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
+          <Button
+            variant="secondary"
+            onClick={() => setShowUserGuide(!showUserGuide)}
+            className="bg-[#2c2a4e] text-white hover:bg-[#3b3a5b]"
+          >
+            Help
+          </Button>
+        </header>
+        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
+          <div className="lg:w-3/4 p-4 flex flex-col overflow-auto">
+            <InteractiveMap />
+            <div className="mt-4">
+              <DataAnalytics />
+            </div>
           </div>
-        </div>
-        <div className="lg:w-1/4 p-4 overflow-auto">
-          <Tabs defaultValue="simulation" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="simulation">Simulation</TabsTrigger>
-              <TabsTrigger value="vehicles">Vehicles</TabsTrigger>
-              <TabsTrigger value="emissions">Emissions</TabsTrigger>
-            </TabsList>
-            <TabsContent value="simulation">
-              <SimulationControlPanel />
-            </TabsContent>
-            <TabsContent value="vehicles">
-              <VehicleTrackingPanel />
-            </TabsContent>
-            <TabsContent value="emissions">
-              <EmissionsDashboard />
-            </TabsContent>
-          </Tabs>
-        </div>
-      </main>
-      <Notifications notifications={notifications} onDismiss={dismissNotification} />
-      {showUserGuide && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-4 rounded-lg max-w-2xl max-h-[80vh] overflow-auto">
-            <UserGuide />
-            <Button className="mt-4" onClick={() => setShowUserGuide(false)}>Close</Button>
+          <div className="lg:w-1/4 p-4 overflow-auto">
+            <Tabs defaultValue="simulation" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 bg-[#2c2a4e]">
+                <TabsTrigger value="simulation" className="data-[state=active]:bg-[#68599f]">Simulation</TabsTrigger>
+                <TabsTrigger value="vehicles" className="data-[state=active]:bg-[#68599f]">Vehicles</TabsTrigger>
+                <TabsTrigger value="emissions" className="data-[state=active]:bg-[#68599f]">Emissions</TabsTrigger>
+              </TabsList>
+              <TabsContent value="simulation">
+                <SimulationControlPanel />
+              </TabsContent>
+              <TabsContent value="vehicles">
+                <VehicleTrackingPanel />
+              </TabsContent>
+              <TabsContent value="emissions">
+                <EmissionsDashboard />
+              </TabsContent>
+            </Tabs>
           </div>
-        </div>
-      )}
+        </main>
+        <footer className="bg-[#2c2a4e] text-white p-2 text-center">
+          <p>&copy; 2023 Port of Dover Traffic Management System</p>
+        </footer>
+        <Notifications notifications={notifications} onDismiss={dismissNotification} />
+        {showUserGuide && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-[#3b3a5b] p-4 rounded-lg max-w-2xl max-h-[80vh] overflow-auto">
+              <UserGuide />
+              <Button className="mt-4 bg-[#68599f] text-white hover:bg-[#7a6ab3]" onClick={() => setShowUserGuide(false)}>Close</Button>
+            </div>
+          </div>
+        )}
       </div>
     </ThemeProvider>
   );
