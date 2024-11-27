@@ -18,7 +18,7 @@ import CarDecorationApi from "./CarDecorationApi";
 import { IModelApp } from "@itwin/core-frontend";
 import { authClient } from "./common/AuthorizationClient";
 import { mapLayerOptions } from "./common/MapLayerOptions";
-import './InteractiveMap.scss';
+// import './InteractiveMap.scss';
 
 const uiProviders: UiItemsProvider[] = [new CarDecorationWidgetProvider()];
 

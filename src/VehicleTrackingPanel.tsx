@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Download, Pause, Play } from 'lucide-react';
-import './VehicleTrackingPanel.scss';
+// import './VehicleTrackingPanel.scss';
 
 interface Vehicle {
     id: string;

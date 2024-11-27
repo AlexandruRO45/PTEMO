@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Slider } from "./ui/slider";
 import { Play, Pause, FastForward, Rewind } from 'lucide-react';
-import './SimulationControlPanel.scss';
+// import './SimulationControlPanel.scss';
 
 const scenarios = [
   { id: 'baseline', name: 'Baseline' },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { X } from 'lucide-react';
-import './Notifications.scss';
+// import './Notifications.scss';
 
 interface Notification {
   id: string;

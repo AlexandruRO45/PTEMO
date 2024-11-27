@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "./ui/chart";
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid } from 'recharts';
-import './EmissionsDashboard.scss';
+// import './EmissionsDashboard.scss';
 
 const emissionsData = [
   { time: '00:00', total: 100, idle: 20, trucks: 70, cars: 30 },

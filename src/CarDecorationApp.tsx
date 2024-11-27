@@ -21,7 +21,7 @@ import React, { useEffect, useState } from "react";
 // import { VehicleTrackingPanel } from "./VehicleTrackingPanel";
 // import { EmissionsDashboard } from "./EmissionsDashboard";
 // import { DataAnalyticsTools } from "./DataAnalyticsTools";
-import "./CarDecorationApp.scss";
+
 import { VehicleTrackingPanel } from './VehicleTrackingPanel';
 import { EmissionsDashboard } from './EmissionsDashboard';
 import { SimulationControlPanel } from './SimulationControlPanel';
@@ -31,6 +31,9 @@ import { InteractiveMap } from './InteractiveMap';
 import { UserGuide } from './UserGuide';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Button } from "./ui/button";
+import { ThemeProvider } from "./ui/theme-provider";
+import './styles/globals.css';
+// import "./CarDecorationApp.scss";
 
 
 // const uiProviders: UiItemsProvider[] = [new CarDecorationWidgetProvider()];
@@ -71,6 +74,7 @@ const CarDecorationApp = () => {
   };
 
   return (
+    <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <header className="bg-primary text-white p-4 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
@@ -117,7 +121,8 @@ const CarDecorationApp = () => {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </ThemeProvider>
   );
 };
 
