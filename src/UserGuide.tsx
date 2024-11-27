@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
-// import './UserGuide.scss';
 
 const helpItems = [
   {
@@ -24,16 +23,16 @@ const helpItems = [
 
 export function UserGuide() {
   return (
-    <Card>
+    <Card className="bg-[#2c2a4e] text-white">
       <CardHeader>
-        <CardTitle>User Guide & Help</CardTitle>
+        <CardTitle className="text-xl font-bold">User Guide & Help</CardTitle>
       </CardHeader>
       <CardContent>
-        <Accordion type="single" collapsible>
+        <Accordion type="single" collapsible className="w-full">
           {helpItems.map((item, index) => (
-            <AccordionItem value={`item-${index}`} key={index}>
-              <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent>{item.answer}</AccordionContent>
+            <AccordionItem value={`item-${index}`} key={index} className="border-b border-[#68599f]">
+              <AccordionTrigger className="text-[#68599f] hover:text-white">{item.question}</AccordionTrigger>
+              <AccordionContent className="text-gray-300">{item.answer}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

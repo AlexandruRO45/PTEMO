@@ -16,14 +16,14 @@ export function EmissionsDashboard() {
   const [timeframe, setTimeframe] = useState('today');
 
   return (
-    <Card className="w-full bg-[#3b3a5b] text-white">
+    <Card className="w-full bg-[#2c2a4e] text-white">
       <CardHeader>
         <CardTitle className="text-2xl font-bold">Emissions Dashboard</CardTitle>
         <Select value={timeframe} onValueChange={setTimeframe}>
-          <SelectTrigger className="w-[180px] bg-[#2c2a4e] text-white border-[#68599f]">
+          <SelectTrigger className="w-[180px] bg-[#3b3a5b] text-white border-[#68599f]">
             <SelectValue placeholder="Select timeframe" />
           </SelectTrigger>
-          <SelectContent className="bg-[#2c2a4e] text-white">
+          <SelectContent className="bg-[#3b3a5b] text-white">
             <SelectItem value="today">Today</SelectItem>
             <SelectItem value="week">This Week</SelectItem>
             <SelectItem value="month">This Month</SelectItem>
@@ -55,7 +55,7 @@ export function EmissionsDashboard() {
               <CartesianGrid strokeDasharray="3 3" stroke="#4b4a6b" />
               <XAxis dataKey="time" stroke="#ffffff" />
               <YAxis stroke="#ffffff" />
-              <Tooltip contentStyle={{ backgroundColor: '#2c2a4e', border: 'none', borderRadius: '8px' }} />
+              <Tooltip contentStyle={{ backgroundColor: '#3b3a5b', border: 'none', borderRadius: '8px' }} />
               <Legend />
               <Area type="monotone" dataKey="total" stroke="#8884d8" fillOpacity={1} fill="url(#colorTotal)" />
               <Area type="monotone" dataKey="idle" stroke="#82ca9d" fillOpacity={1} fill="url(#colorIdle)" />
@@ -65,12 +65,12 @@ export function EmissionsDashboard() {
           </ResponsiveContainer>
         </div>
         <div className="mt-4 grid grid-cols-2 gap-4">
-          <div className="bg-[#2c2a4e] p-4 rounded-lg">
+          <div className="bg-[#3b3a5b] p-4 rounded-lg">
             <h3 className="text-sm font-medium text-[#68599f]">Total Emissions</h3>
             <p className="text-2xl font-bold">1500 kg CO2</p>
             <p className="text-sm text-[#82ca9d]">+5% from yesterday</p>
           </div>
-          <div className="bg-[#2c2a4e] p-4 rounded-lg">
+          <div className="bg-[#3b3a5b] p-4 rounded-lg">
             <h3 className="text-sm font-medium text-[#68599f]">Idle Emissions</h3>
             <p className="text-2xl font-bold">470 kg CO2</p>
             <p className="text-sm text-[#ff8042]">+12% from yesterday</p>

@@ -76,17 +76,20 @@ const CarDecorationApp = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <div className="min-h-screen bg-[#3b3a5b] text-white flex flex-col">
-        <header className="bg-[#68599f] text-white p-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
+        <header className="bg-[#2c2a4e] text-white p-4 flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <img src="/placeholder.svg?height=40&width=40" alt="Logo" className="h-10 w-10" />
+            <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
+          </div>
           <Button
-            variant="secondary"
+            variant="outline"
             onClick={() => setShowUserGuide(!showUserGuide)}
-            className="bg-[#2c2a4e] text-white hover:bg-[#3b3a5b]"
+            className="bg-[#3b3a5b] text-white border-[#68599f] hover:bg-[#68599f]"
           >
             Help
           </Button>
         </header>
-        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden">
+        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden bg-[#3b3a5b]">
           <div className="lg:w-3/4 p-4 flex flex-col overflow-auto">
             <InteractiveMap />
             <div className="mt-4">
