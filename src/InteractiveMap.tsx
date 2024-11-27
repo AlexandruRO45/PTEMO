@@ -74,15 +74,15 @@ export function InteractiveMap() {
   };
 
   return (
-    <Card className="w-full h-[500px]">
+    <Card className="w-full h-[500px] bg-[#3b3a5b] text-white">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Port of Dover Interactive Map</CardTitle>
+        <CardTitle className="text-xl font-bold">Port of Dover Interactive Map</CardTitle>
         <div className="flex space-x-2">
           <Select value={updateFrequency} onValueChange={setUpdateFrequency}>
-            <SelectTrigger className="w-[120px]">
+            <SelectTrigger className="w-[120px] bg-[#2c2a4e] text-white border-[#68599f]">
               <SelectValue placeholder="Update every" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-[#2c2a4e] text-white">
               <SelectItem value="1">1 second</SelectItem>
               <SelectItem value="5">5 seconds</SelectItem>
               <SelectItem value="10">10 seconds</SelectItem>
@@ -90,21 +90,21 @@ export function InteractiveMap() {
               <SelectItem value="60">1 minute</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="icon" onClick={toggleUpdates}>
+          <Button variant="outline" size="icon" onClick={toggleUpdates} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             {isUpdating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.min(zoom + 0.1, 2))}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.min(zoom + 0.1, 2))} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <ZoomIn className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.max(zoom - 0.1, 0.5))}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.max(zoom - 0.1, 0.5))} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <ZoomOut className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(1)}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(1)} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <Maximize className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="relative h-[calc(100%-4rem)] bg-gray-200 overflow-hidden">
+      <CardContent className="relative h-[calc(100%-4rem)] bg-[#2c2a4e] overflow-hidden">
         <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }} className="w-full h-full">
           {/* This would be replaced with an actual map component */}
           <Viewer

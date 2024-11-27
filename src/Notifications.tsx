@@ -1,7 +1,6 @@
 import React from 'react';
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { X } from 'lucide-react';
-// import './Notifications.scss';
 
 interface Notification {
   id: string;
@@ -18,14 +17,14 @@ export function Notifications({ notifications, onDismiss }: NotificationsProps) 
   return (
     <div className="fixed bottom-4 right-4 space-y-2 max-w-sm z-50">
       {notifications.map((notification) => (
-        <Alert key={notification.id} className="bg-white shadow-lg">
-          <AlertTitle className="flex justify-between items-center">
+        <Alert key={notification.id} className="bg-[#2c2a4e] border-[#68599f] text-white">
+          <AlertTitle className="flex justify-between items-center text-[#68599f]">
             {notification.title}
-            <button onClick={() => onDismiss(notification.id)} className="text-gray-500 hover:text-gray-700">
+            <button onClick={() => onDismiss(notification.id)} className="text-gray-300 hover:text-white">
               <X size={16} />
             </button>
           </AlertTitle>
-          <AlertDescription>{notification.description}</AlertDescription>
+          <AlertDescription className="text-gray-300">{notification.description}</AlertDescription>
         </Alert>
       ))}
     </div>

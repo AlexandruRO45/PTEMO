@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Download, Pause, Play } from 'lucide-react';
-// import './VehicleTrackingPanel.scss';
 
 interface Vehicle {
     id: string;
@@ -36,26 +35,26 @@ export function VehicleTrackingPanel() {
     };
 
     return (
-        <Card className="w-full">
+        <Card className="w-full bg-[#3b3a5b] text-white">
             <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>Vehicle Tracking</CardTitle>
+                <CardTitle className="text-xl font-bold">Vehicle Tracking</CardTitle>
                 <div className="flex space-x-2">
                     <Select value={updateFrequency} onValueChange={setUpdateFrequency}>
-                        <SelectTrigger className="w-[120px]">
+                        <SelectTrigger className="w-[120px] bg-[#2c2a4e] text-white border-[#68599f]">
                             <SelectValue placeholder="Update every" />
                         </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="1">1 second</SelectItem> {/* Added new item here */}
+                        <SelectContent className="bg-[#2c2a4e] text-white">
+                            <SelectItem value="1">1 second</SelectItem>
                             <SelectItem value="5">5 seconds</SelectItem>
                             <SelectItem value="10">10 seconds</SelectItem>
                             <SelectItem value="30">30 seconds</SelectItem>
                             <SelectItem value="60">1 minute</SelectItem>
                         </SelectContent>
                     </Select>
-                    <Button variant="outline" size="icon" onClick={toggleUpdates}>
+                    <Button variant="outline" size="icon" onClick={toggleUpdates} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
                         {isUpdating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
                     </Button>
-                    <Button variant="outline" size="icon" onClick={handleExport}>
+                    <Button variant="outline" size="icon" onClick={handleExport} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
                         <Download className="h-4 w-4" />
                     </Button>
                 </div>
@@ -63,11 +62,11 @@ export function VehicleTrackingPanel() {
             <CardContent>
                 <div className="space-y-4">
                     {mockVehicles.map((vehicle) => (
-                        <Card key={vehicle.id} className="p-4 hover:bg-gray-100 cursor-pointer" onClick={() => setSelectedVehicle(vehicle)}>
+                        <Card key={vehicle.id} className="p-4 bg-[#2c2a4e] hover:bg-[#68599f] cursor-pointer transition-colors" onClick={() => setSelectedVehicle(vehicle)}>
                             <div className="flex justify-between items-center">
                                 <div>
                                     <h3 className="font-bold">{vehicle.id} - {vehicle.type}</h3>
-                                    <p className="text-sm text-gray-500">{vehicle.location} - {vehicle.status}</p>
+                                    <p className="text-sm text-gray-300">{vehicle.location} - {vehicle.status}</p>
                                 </div>
                                 <div className="text-right">
                                     <p className="text-sm">Idle: {vehicle.idleTime}</p>
@@ -77,6 +76,13 @@ export function VehicleTrackingPanel() {
                         </Card>
                     ))}
                 </div>
+                {selectedVehicle && (
+                    <div className="mt-4 p-4 bg-[#68599f] rounded-lg">
+                        <h4 className="font-bold">Selected Vehicle: {selectedVehicle.id}</h4>
+                        <p>Type: {selectedVehicle.type}</p>
+                        <p>Status: {selectedVehicle.status}</p>
+                    </div>
+                )}
             </CardContent>
         </Card>
     );
