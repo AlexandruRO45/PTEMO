@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { ScrollArea } from "./ui/scroll-area";
 import { Download, Pause, Play } from 'lucide-react';
 
 interface Vehicle {
@@ -65,29 +66,39 @@ export function VehicleTrackingPanel() {
                 </div>
             </CardHeader>
             <CardContent>
-                <div className="space-y-4">
-                    {mockVehicles.map((vehicle) => (
-                        <Card key={vehicle.id} className="p-4 bg-[#2c2a4e] hover:bg-[#68599f] cursor-pointer transition-colors" onClick={() => setSelectedVehicle(vehicle)}>
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <h3 className="font-bold text-gray-300">{vehicle.id} - {vehicle.type}</h3>
-                                    <p className="text-sm text-gray-300">{vehicle.location} - {vehicle.status}</p>
+                <ScrollArea className="h-[300px] w-full pr-4">
+                    <div className="space-y-4">
+                        {mockVehicles.map((vehicle) => (
+                            <Card
+                                key={vehicle.id}
+                                className={`p-4 bg-[#3b3a5b] hover:bg-[#68599f] cursor-pointer transition-colors ${selectedVehicle?.id === vehicle.id ? 'bg-[#68599f]' : ''}`}
+                                onClick={() => setSelectedVehicle(vehicle)}
+                            >
+                                <div className="flex justify-between items-center">
+                                    <div>
+                                        <h3 className="font-bold text-gray-300">{vehicle.id} - {vehicle.type}</h3>
+                                        <p className="text-sm text-[#f5dcd9]">{vehicle.location} - {vehicle.status}</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-sm text-[#f5dcd9]">Idle: {vehicle.idleTime}</p>
+                                        <p className="text-sm text-[#f5dcd9]">Emissions: {vehicle.emissions}</p>
+                                    </div>
                                 </div>
-                                <div className="text-right">
-                                    <p className="text-sm text-gray-300">Idle: {vehicle.idleTime}</p>
-                                    <p className="text-sm text-gray-300">Emissions: {vehicle.emissions}</p>
-                                </div>
-                            </div>
-                        </Card>
-                    ))}
-                </div>
-                {selectedVehicle && (
+                            </Card>
+                        ))}
+                    </div>
+                </ScrollArea>
+                {/* Uncomment this block to display selected vehicle details */}
+                {/* {selectedVehicle && (
                     <div className="mt-4 p-4 bg-[#68599f] rounded-lg">
                         <h4 className="font-bold">Selected Vehicle: {selectedVehicle.id}</h4>
                         <p>Type: {selectedVehicle.type}</p>
                         <p>Status: {selectedVehicle.status}</p>
+                        <p>Location: {selectedVehicle.location}</p>
+                        <p>Idle Time: {selectedVehicle.idleTime}</p>
+                        <p>Emissions: {selectedVehicle.emissions}</p>
                     </div>
-                )}
+                )} */}
             </CardContent>
         </Card>
     );

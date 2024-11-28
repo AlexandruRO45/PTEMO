@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 import { ThemeProvider } from "./ui/theme-provider";
 import './styles/globals.css';
 
-// const logo = `${process.env.PUBLIC_URL}/logo.svg`;
+const logo = `${process.env.PUBLIC_URL}/logo.svg`;
 
 
 const CarDecorationApp = () => {
@@ -34,7 +34,7 @@ const CarDecorationApp = () => {
       <div className="min-h-screen bg-[#3b3a5b] text-white flex flex-col">
         <header className="bg-[#2c2a4e] text-white p-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <img src="/placeholder.svg?height=40&width=40" alt="Logo" className="h-10 w-10" />
+            <img src={logo} alt="Logo" style={{ height: "40px", marginRight: "16px" }} />
             <h1 className="text-2xl font-bold">Port of Dover Traffic Management</h1>
           </div>
           <Button
