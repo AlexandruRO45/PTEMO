@@ -11,6 +11,7 @@ import {
   Input,
   Label,
   LabeledSelect,
+  ProgressRadial,
   SelectOption,
   Text,
   toaster,
@@ -26,7 +27,6 @@ import {
   Widget,
   WidgetState
 } from "@itwin/appui-react";
-import { LoadingSpinner } from "@itwin/core-react";
 import "./CarDecoration.scss";
 import { SvgHelpCircularHollow } from "@itwin/itwinui-icons-react";
 import { Viewport } from "@itwin/core-frontend";
@@ -39,7 +39,7 @@ const densityStates: SelectOption<Density>[] = [
   { value: "High", label: "High" },
 ];
 
-const CarDecorationWidget = () => {
+export const CarDecorationWidget = () => {
   const viewport = useActiveViewport();
 
   /** True when performing API query */
@@ -186,7 +186,7 @@ const CarDecorationWidget = () => {
             disabled={isLoading || isCreatingRoads || !allowQuery}
           >
             {isLoading || isCreatingRoads ? (
-              <LoadingSpinner />
+              <ProgressRadial />
             ) : (
               "Update Street Data"
             )}
@@ -278,7 +278,7 @@ export class CarDecorationWidgetProvider implements UiItemsProvider {
       widgets.push({
         id: "CarDecorationWidget",
         label: "Car Decoration Selector",
-        defaultState: WidgetState.Open,
+        defaultState: WidgetState.Closed,
         // eslint-disable-next-line react/display-name
         content: <CarDecorationWidget />,
       });
