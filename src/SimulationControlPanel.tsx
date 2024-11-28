@@ -4,7 +4,6 @@ import { Button } from "./ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Slider } from "./ui/slider";
 import { Play, Pause, FastForward, Rewind } from 'lucide-react';
-// import './SimulationControlPanel.scss';
 
 const scenarios = [
   { id: 'baseline', name: 'Baseline' },
@@ -22,20 +21,20 @@ export function SimulationControlPanel() {
   const handleSpeedChange = (newSpeed: number[]) => setSpeed(newSpeed[0]);
 
   return (
-    <Card className="w-full">
+    <Card className="w-full bg-[#3b3a5b] text-white">
       <CardHeader>
-        <CardTitle>Simulation Control</CardTitle>
+        <CardTitle className="text-xl font-bold">Simulation Control</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <label htmlFor="scenario-select" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="scenario-select" className="block text-sm font-medium text-gray-300 mb-1">
             Scenario
           </label>
           <Select value={selectedScenario} onValueChange={setSelectedScenario}>
-            <SelectTrigger id="scenario-select">
+            <SelectTrigger id="scenario-select" className="bg-[#2c2a4e] text-white border-[#68599f]">
               <SelectValue placeholder="Select a scenario" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-[#2c2a4e] text-white">
               {scenarios.map((scenario) => (
                 <SelectItem key={scenario.id} value={scenario.id}>
                   {scenario.name}
@@ -45,13 +44,13 @@ export function SimulationControlPanel() {
           </Select>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="icon" onClick={handlePlayPause}>
+          <Button variant="outline" size="icon" onClick={handlePlayPause} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <Rewind className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon">
+          <Button variant="outline" size="icon" className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <FastForward className="h-4 w-4" />
           </Button>
           <div className="flex-grow">
@@ -66,7 +65,7 @@ export function SimulationControlPanel() {
           </div>
           <span className="text-sm font-medium">{speed}x</span>
         </div>
-        <Button className="w-full">Run Comparison</Button>
+        <Button className="w-full bg-[#68599f] hover:bg-[#68599f]/80 text-white">Run Comparison</Button>
       </CardContent>
     </Card>
   );

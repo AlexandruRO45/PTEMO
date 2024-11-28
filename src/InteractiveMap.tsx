@@ -5,20 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ZoomIn, ZoomOut, Maximize, Pause, Play } from 'lucide-react';
 import { Viewer, ViewerViewportControlOptions } from "@itwin/web-viewer-react";
 import { UiFramework, UiItemsProvider } from "@itwin/appui-react";
-import {
-  ThemeProvider,
-  // Surface,
-  Text,
-  ProgressRadial,
-  // Alert,
-  ThemeType,
-} from "@itwin/itwinui-react";
+import { ThemeType } from "@itwin/itwinui-react";
 import { CarDecorationWidgetProvider } from "./CarDecorationWidget";
 import CarDecorationApi from "./CarDecorationApi";
 import { IModelApp } from "@itwin/core-frontend";
 import { authClient } from "./common/AuthorizationClient";
 import { mapLayerOptions } from "./common/MapLayerOptions";
-// import './InteractiveMap.scss';
 
 const uiProviders: UiItemsProvider[] = [new CarDecorationWidgetProvider()];
 
@@ -44,14 +36,11 @@ const viewportOptions: ViewerViewportControlOptions = {
 const iTwinId = process.env.IMJS_ITWIN_ID;
 const iModelId = process.env.IMJS_IMODEL_ID;
 const theme = (process.env.THEME ?? "dark") as ThemeType;
-const logo = `${process.env.PUBLIC_URL}/logo.svg`;
 
 export function InteractiveMap() {
   const [zoom, setZoom] = useState(1);
   const [isUpdating, setIsUpdating] = useState(true);
   const [updateFrequency, setUpdateFrequency] = useState('5');
-
-  const [iModelConnected, setIModelConnected] = useState(false);
 
   /** Sign-in */
   useEffect(() => {
@@ -74,15 +63,15 @@ export function InteractiveMap() {
   };
 
   return (
-    <Card className="w-full h-[500px]">
+    <Card className="w-full h-[500px] bg-[#3b3a5b] text-white">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Port of Dover Interactive Map</CardTitle>
+        <CardTitle className="text-xl font-bold">Port of Dover Interactive Map</CardTitle>
         <div className="flex space-x-2">
           <Select value={updateFrequency} onValueChange={setUpdateFrequency}>
-            <SelectTrigger className="w-[120px]">
+            <SelectTrigger className="w-[120px] bg-[#2c2a4e] text-white border-[#68599f]">
               <SelectValue placeholder="Update every" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-[#2c2a4e] text-white">
               <SelectItem value="1">1 second</SelectItem>
               <SelectItem value="5">5 seconds</SelectItem>
               <SelectItem value="10">10 seconds</SelectItem>
@@ -90,21 +79,21 @@ export function InteractiveMap() {
               <SelectItem value="60">1 minute</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="icon" onClick={toggleUpdates}>
+          <Button variant="outline" size="icon" onClick={toggleUpdates} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             {isUpdating ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.min(zoom + 0.1, 2))}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.min(zoom + 0.1, 2))} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <ZoomIn className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.max(zoom - 0.1, 0.5))}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(zoom => Math.max(zoom - 0.1, 0.5))} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <ZoomOut className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={() => setZoom(1)}>
+          <Button variant="outline" size="icon" onClick={() => setZoom(1)} className="bg-[#2c2a4e] text-white border-[#68599f] hover:bg-[#68599f]">
             <Maximize className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="relative h-[calc(100%-4rem)] bg-gray-200 overflow-hidden">
+      <CardContent className="relative h-[calc(100%-5rem)] overflow-hidden">
         <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }} className="w-full h-full">
           {/* This would be replaced with an actual map component */}
           <Viewer
@@ -121,7 +110,6 @@ export function InteractiveMap() {
             uiProviders={uiProviders}
             enablePerformanceMonitors={false}
             theme={theme}
-            onIModelConnected={() => setIModelConnected(true)}
           />
         </div>
       </CardContent>
