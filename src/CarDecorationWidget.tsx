@@ -177,90 +177,90 @@ export const CarDecorationWidget = () => {
   const widgetRef = useRef(null);
   const updateButtonRef = useRef(null);
 
-  return (
-    <div className="sample-options">
-      <div className="sample-grid" ref={widgetRef}>
-        <div ref={updateButtonRef}>
-          <Button
-            onClick={handleSetViewBounds}
-            disabled={isLoading || isCreatingRoads || !allowQuery}
-          >
-            {isLoading || isCreatingRoads ? (
-              <ProgressRadial />
-            ) : (
-              "Update Street Data"
-            )}
-          </Button>
-        </div>
-        {(!allowQuery) && <Tooltip content={"Zoom in to enable"} reference={updateButtonRef} />}
-        <LabeledSelect
-          label="Car density"
-          displayStyle="inline"
-          className="span-2"
-          options={densityStates}
-          value={densityState}
-          onChange={(value: Density) => setDensityState(value)}
-          disabled={isLoading || isCreatingRoads}
-        />
-        <ToggleSwitch
-          label="Left side"
-          checked={leftSide}
-          onChange={(event) => setLeftSide(event.target.checked)}
-          disabled={isLoading || isCreatingRoads}
-        />
-        <ToggleSwitch
-          label="Pause"
-          checked={paused}
-          onChange={(event) => setPaused(event.target.checked)}
-          disabled={isLoading || isCreatingRoads}
-        />
-        <ToggleSwitch
-          label="Streets only"
-          checked={streetsOnlyMap}
-          onChange={(event) => setStreetsOnlyMap(event.target.checked)}
-          disabled={isLoading || isCreatingRoads}
-        />
-        <div className="travel-destination">
-          <Label htmlFor="destination">
-            <span className="toggle-label">
-              <Text>Destination</Text>
-              <Tooltip content="Type a place name and press enter to travel there">
-                <IconButton
-                  size="small"
-                  styleType="borderless"
-                >
-                  <SvgHelpCircularHollow />
-                </IconButton>
-              </Tooltip>
-            </span>
-          </Label>
-          <Input
-            id="destination"
-            size="small"
-            className="travel-destination-input"
-            onChange={(e) => setDestination(e.currentTarget.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <Button
-            size="small"
-            className="travel-destination-btn"
-            styleType="cta"
-            disabled={!destination.length}
-            onClick={handleTravel}
-          >
-            Travel
-          </Button>
-        </div>
-        {(isLoading || isCreatingRoads) && <Tooltip content={"Loading data"} reference={widgetRef} />}
-        <Alert type="informational" className="instructions">
-          Zoom in to view cars and use the controls above to change the traffic
-          simulation settings. Clicking the update button resets the OSM data
-          according to the view extents. A red box is drawn around the area that
-          contains street data and cars. The number of cars is determined by the
-          length of available streets and car density with a max of 9000 cars.
-        </Alert>
-      </div>
-    </div>
+  return (null
+    // <div className="sample-options">
+    //   <div className="sample-grid" ref={widgetRef}>
+    //     <div ref={updateButtonRef}>
+    //       <Button
+    //         onClick={handleSetViewBounds}
+    //         disabled={isLoading || isCreatingRoads || !allowQuery}
+    //       >
+    //         {isLoading || isCreatingRoads ? (
+    //           <ProgressRadial />
+    //         ) : (
+    //           "Update Street Data"
+    //         )}
+    //       </Button>
+    //     </div>
+    //     {(!allowQuery) && <Tooltip content={"Zoom in to enable"} reference={updateButtonRef} />}
+    //     <LabeledSelect
+    //       label="Car density"
+    //       displayStyle="inline"
+    //       className="span-2"
+    //       options={densityStates}
+    //       value={densityState}
+    //       onChange={(value: Density) => setDensityState(value)}
+    //       disabled={isLoading || isCreatingRoads}
+    //     />
+    //     <ToggleSwitch
+    //       label="Left side"
+    //       checked={leftSide}
+    //       onChange={(event) => setLeftSide(event.target.checked)}
+    //       disabled={isLoading || isCreatingRoads}
+    //     />
+    //     <ToggleSwitch
+    //       label="Pause"
+    //       checked={paused}
+    //       onChange={(event) => setPaused(event.target.checked)}
+    //       disabled={isLoading || isCreatingRoads}
+    //     />
+    //     <ToggleSwitch
+    //       label="Streets only"
+    //       checked={streetsOnlyMap}
+    //       onChange={(event) => setStreetsOnlyMap(event.target.checked)}
+    //       disabled={isLoading || isCreatingRoads}
+    //     />
+    //     <div className="travel-destination">
+    //       <Label htmlFor="destination">
+    //         <span className="toggle-label">
+    //           <Text>Destination</Text>
+    //           <Tooltip content="Type a place name and press enter to travel there">
+    //             <IconButton
+    //               size="small"
+    //               styleType="borderless"
+    //             >
+    //               <SvgHelpCircularHollow />
+    //             </IconButton>
+    //           </Tooltip>
+    //         </span>
+    //       </Label>
+    //       <Input
+    //         id="destination"
+    //         size="small"
+    //         className="travel-destination-input"
+    //         onChange={(e) => setDestination(e.currentTarget.value)}
+    //         onKeyPress={handleKeyPress}
+    //       />
+    //       <Button
+    //         size="small"
+    //         className="travel-destination-btn"
+    //         styleType="cta"
+    //         disabled={!destination.length}
+    //         onClick={handleTravel}
+    //       >
+    //         Travel
+    //       </Button>
+    //     </div>
+    //     {(isLoading || isCreatingRoads) && <Tooltip content={"Loading data"} reference={widgetRef} />}
+    //     <Alert type="informational" className="instructions">
+    //       Zoom in to view cars and use the controls above to change the traffic
+    //       simulation settings. Clicking the update button resets the OSM data
+    //       according to the view extents. A red box is drawn around the area that
+    //       contains street data and cars. The number of cars is determined by the
+    //       length of available streets and car density with a max of 9000 cars.
+    //     </Alert>
+    //   </div>
+    // </div>
   );
 };
 

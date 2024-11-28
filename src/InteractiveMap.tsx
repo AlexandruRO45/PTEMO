@@ -5,20 +5,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ZoomIn, ZoomOut, Maximize, Pause, Play } from 'lucide-react';
 import { Viewer, ViewerViewportControlOptions } from "@itwin/web-viewer-react";
 import { UiFramework, UiItemsProvider } from "@itwin/appui-react";
-import {
-  ThemeProvider,
-  // Surface,
-  Text,
-  ProgressRadial,
-  // Alert,
-  ThemeType,
-} from "@itwin/itwinui-react";
+import { ThemeType } from "@itwin/itwinui-react";
 import { CarDecorationWidgetProvider } from "./CarDecorationWidget";
 import CarDecorationApi from "./CarDecorationApi";
 import { IModelApp } from "@itwin/core-frontend";
 import { authClient } from "./common/AuthorizationClient";
 import { mapLayerOptions } from "./common/MapLayerOptions";
-// import './InteractiveMap.scss';
 
 const uiProviders: UiItemsProvider[] = [new CarDecorationWidgetProvider()];
 
@@ -44,7 +36,6 @@ const viewportOptions: ViewerViewportControlOptions = {
 const iTwinId = process.env.IMJS_ITWIN_ID;
 const iModelId = process.env.IMJS_IMODEL_ID;
 const theme = (process.env.THEME ?? "dark") as ThemeType;
-const logo = `${process.env.PUBLIC_URL}/logo.svg`;
 
 export function InteractiveMap() {
   const [zoom, setZoom] = useState(1);
@@ -104,7 +95,7 @@ export function InteractiveMap() {
           </Button>
         </div>
       </CardHeader>
-      <CardContent className="relative h-[calc(100%-4rem)] bg-[#2c2a4e] overflow-hidden">
+      <CardContent className="relative h-[calc(100%-5rem)] overflow-hidden">
         <div style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }} className="w-full h-full">
           {/* This would be replaced with an actual map component */}
           <Viewer
