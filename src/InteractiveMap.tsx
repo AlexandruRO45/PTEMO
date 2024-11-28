@@ -42,8 +42,6 @@ export function InteractiveMap() {
   const [isUpdating, setIsUpdating] = useState(true);
   const [updateFrequency, setUpdateFrequency] = useState('5');
 
-  // const [iModelConnected, setIModelConnected] = useState(false);
-
   /** Sign-in */
   useEffect(() => {
     void authClient.signIn();
@@ -112,7 +110,6 @@ export function InteractiveMap() {
             uiProviders={uiProviders}
             enablePerformanceMonitors={false}
             theme={theme}
-          // onIModelConnected={() => setIModelConnected(true)}
           />
         </div>
       </CardContent>
