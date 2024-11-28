@@ -2,7 +2,7 @@
 * Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 * See LICENSE.md in the project root for license terms and full copyright notice.
 *--------------------------------------------------------------------------------------------*/
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { VehicleTrackingPanel } from './VehicleTrackingPanel';
 import { EmissionsDashboard } from './EmissionsDashboard';
 import { SimulationControlPanel } from './SimulationControlPanel';
@@ -10,6 +10,7 @@ import { DataAnalytics } from './DataAnalytics';
 import { Notifications } from './Notifications';
 import { InteractiveMap } from './InteractiveMap';
 import { UserGuide } from './UserGuide';
+import { QuickStats } from './QuickStats';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Button } from "./ui/button";
 import { ThemeProvider } from "./ui/theme-provider";
@@ -44,30 +45,28 @@ const CarDecorationApp = () => {
             Help
           </Button>
         </header>
-        <main className="flex-grow flex flex-col lg:flex-row overflow-hidden bg-[#3b3a5b]">
-          <div className="lg:w-3/4 p-4 flex flex-col overflow-auto">
+        <main className="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-4 p-4 bg-[#3b3a5b]">
+          <div className="lg:col-span-2 space-y-4">
             <InteractiveMap />
-            <div className="mt-4">
-              <DataAnalytics />
+            <div className="grid grid-cols-2 gap-4">
+              <SimulationControlPanel />
+              <VehicleTrackingPanel />
             </div>
           </div>
-          <div className="lg:w-1/4 p-4 overflow-auto">
-            <Tabs defaultValue="simulation" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-[#2c2a4e]">
-                <TabsTrigger value="simulation" className="data-[state=active]:bg-[#68599f]">Simulation</TabsTrigger>
-                <TabsTrigger value="vehicles" className="data-[state=active]:bg-[#68599f]">Vehicles</TabsTrigger>
+          <div className="space-y-4">
+            <Tabs defaultValue="emissions" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-[#2c2a4e]">
                 <TabsTrigger value="emissions" className="data-[state=active]:bg-[#68599f]">Emissions</TabsTrigger>
+                <TabsTrigger value="analytics" className="data-[state=active]:bg-[#68599f]">Analytics</TabsTrigger>
               </TabsList>
-              <TabsContent value="simulation">
-                <SimulationControlPanel />
-              </TabsContent>
-              <TabsContent value="vehicles">
-                <VehicleTrackingPanel />
-              </TabsContent>
               <TabsContent value="emissions">
                 <EmissionsDashboard />
               </TabsContent>
+              <TabsContent value="analytics">
+                <DataAnalytics />
+              </TabsContent>
             </Tabs>
+            <QuickStats />
           </div>
         </main>
         <footer className="bg-[#2c2a4e] text-white p-2 text-center">

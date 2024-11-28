@@ -65,7 +65,7 @@ export function SimulationControlPanel() {
           </div>
           <span className="text-sm font-medium">{speed}x</span>
         </div>
-        <Button className="w-full bg-[#68599f] hover:bg-[#7a6ab3] text-white">Run Comparison</Button>
+        <Button className="w-full bg-[#68599f] hover:bg-[#68599f]/80 text-white">Run Comparison</Button>
       </CardContent>
     </Card>
   );

@@ -17,6 +17,11 @@ const mockVehicles: Vehicle[] = [
     { id: 'V001', type: 'Truck', location: 'Zone A', status: 'Moving', idleTime: '00:05:00', emissions: '2.5 kg CO2' },
     { id: 'V002', type: 'Car', location: 'Zone B', status: 'Idle', idleTime: '00:10:00', emissions: '0.8 kg CO2' },
     { id: 'V003', type: 'Truck', location: 'Zone C', status: 'Loading', idleTime: '00:20:00', emissions: '3.2 kg CO2' },
+    { id: 'V004', type: 'Car', location: 'Zone D', status: 'Moving', idleTime: '00:15:00', emissions: '1.0 kg CO2' },
+    { id: 'V005', type: 'Truck', location: 'Zone E', status: 'Idle', idleTime: '00:30:00', emissions: '4.0 kg CO2' },
+    { id: 'V006', type: 'Car', location: 'Zone B', status: 'Moving', idleTime: '00:25:00', emissions: '1.5 kg CO2' },
+    { id: 'V007', type: 'Truck', location: 'Zone E', status: 'Idle', idleTime: '00:45:00', emissions: '5.0 kg CO2' },
+    { id: 'V008', type: 'Car', location: 'Zone A', status: 'Moving', idleTime: '00:35:00', emissions: '2.2 kg CO2' },
 ];
 
 export function VehicleTrackingPanel() {
@@ -65,12 +70,12 @@ export function VehicleTrackingPanel() {
                         <Card key={vehicle.id} className="p-4 bg-[#2c2a4e] hover:bg-[#68599f] cursor-pointer transition-colors" onClick={() => setSelectedVehicle(vehicle)}>
                             <div className="flex justify-between items-center">
                                 <div>
-                                    <h3 className="font-bold">{vehicle.id} - {vehicle.type}</h3>
+                                    <h3 className="font-bold text-gray-300">{vehicle.id} - {vehicle.type}</h3>
                                     <p className="text-sm text-gray-300">{vehicle.location} - {vehicle.status}</p>
                                 </div>
                                 <div className="text-right">
-                                    <p className="text-sm">Idle: {vehicle.idleTime}</p>
-                                    <p className="text-sm">Emissions: {vehicle.emissions}</p>
+                                    <p className="text-sm text-gray-300">Idle: {vehicle.idleTime}</p>
+                                    <p className="text-sm text-gray-300">Emissions: {vehicle.emissions}</p>
                                 </div>
                             </div>
                         </Card>
@@ -87,4 +92,3 @@ export function VehicleTrackingPanel() {
         </Card>
     );
 }
-
