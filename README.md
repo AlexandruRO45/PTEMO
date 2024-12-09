@@ -1,50 +1,178 @@
-# Port Traffic Emissions Management and Optimization (PTEMO) - Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform
+<div align="center">
+    <img src="https://github.com/AlexandruRO45/PTEMO/blob/main/public/logo.svg" alt="PTEMO Logo" width="200"/>
+    <p>
+        <i>Transforming Port Logistics Through Digital Twin Innovation 🚢</i>
+    </p>
+    <div id="badges">
+        <!-- GitHub Badges -->
+        <a href="https://github.com/AlexandruRO45/PTEMO/releases">
+            <img src="https://img.shields.io/github/v/release/AlexandruRO45/PTEMO?color=blue&label=Latest%20Release" alt="Latest Release Badge"/></a>
+        <a href="https://github.com/AlexandruRO45/PTEMO/issues">
+            <img src="https://img.shields.io/github/issues/AlexandruRO45/PTEMO.svg" alt="Issues Badge"/></a>
+        <a href="https://github.com/AlexandruRO45/PTEMO/pulls">
+            <img src="https://img.shields.io/github/issues-pr/AlexandruRO45/PTEMO.svg" alt="Pull Requests Badge"/></a>
+    </div>
+    <div id="badges">
+        <!-- External Website Badge -->
+        <a href="https://transit.ac.uk/">
+            <img src="https://img.shields.io/badge/Website-TransiT-blue" alt="TransiT Website Badge"/></a>
+        <!-- YouTube Presentation Badge -->
+        <a href="https://youtube.com/your-video-link">
+            <img src="https://img.shields.io/badge/Watch-YouTube-red" alt="YouTube Presentation Badge"/></a>
+    </div>
+</div>
 
-## Purpose
+---
 
-The purpose of this sample is to demonstrate the following:
+# Port Traffic Emissions Management and Optimization (PTEMO)  Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform  
 
-* Working with an external API to generate particles for a decorator
-* Creating a decorator and rendering it in the active view.
-* Visualizing cars moving along a network of roads.
+**Welcome to PTEMO!**  
+This project harnesses the power of **digital twins** to revolutionize logistics and emissions management at one of the UK’s busiest transport hubs, the Port of Dover.  
 
-## Description
+---
 
-In this sample, particles move along a complex road network created from OpenStreetMap data. This road network is generated using two methods from the [OverpassApi](./open-street-map/OverpassApi.ts) class. The first method requests OSM street data within the bounds of the viewport and constructs streets and intersections. The second rebuilds the existing network with a new driving direction. Note: there should only be one instance of OverpassApi data in the app.
+## 🌟 Purpose  
+- Develop scalable digital twin models for constrained environments.  
+- Simulate and analyze traffic flow and emissions hotspots.  
+- Build an intuitive user interface (UI) for scenario-based operational analysis.  
 
-These particles are built and rendered using the [Decorator](https://www.itwinjs.org/reference/core-frontend/views/decorator/) and [ParticleCollectionBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/particlecollectionbuilder/) interfaces. The `decorate` method in the decorator updates the location and directions of existing particles and adds them to a new `ParticleCollectionBuilder`. Then it uses a [GraphicBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/graphicbuilder/) to draw a rectangle around the area that may contain particles. Lastly, this method adds the [RenderGraphics](https://www.itwinjs.org/reference/core-frontend/rendering/rendergraphic/) produced by these builders to the [DecorateContext](https://www.itwinjs.org/reference/core-frontend/rendering/decoratecontext) so that they are rendered.
 
-To help with memory management, particle textures are owned by the decorator, which contains a `dispose()` method that needs to be called before a decorator is destroyed.
 
-The `createDecorator` method in [CarDecorationApi.ts]("./CarDecorationApi.ts") is responsible for disposing the existing car decorator and creating a new decorator. It adds an event listener to the [Viewport.onRender](https://www.itwinjs.org/reference/core-frontend/views/viewport/?term=onrender#onrender) method to re-render the decorator on every frame and passes the new decorator to the [ViewManager.addDecorator](https://www.itwinjs.org/reference/core-frontend/views/viewmanager/adddecorator/) method to have it rendered in all active views. Note that this method updates `CarDecorationApi.dispose()` to be tied to the new decorator.
+## 🚀 Key Features  
 
-## Additional Resources
+### Dashboards for Traffic Monitoring and Emissions Analytics  
+- **Emissions Dashboard**: Real-time insights with cumulative area charts and filters.  
+- **Data Analytics**: Metrics on idle times, vehicle density, and emissions.  
 
-For more examples of decorators, see these samples:
+### Interactive Tools for Real-Time Operations  
+- **InteractiveMap**: Visualize road networks with zooming, filtering, and simulation toggling.  
+- **VehicleTrackingPanel**: Track vehicle statuses, idle times, and emissions data.  
+- **SimulationControlPanel**: Run scenario-based simulations with dynamic playback options.  
 
-* [Heatmap Decorator Sample](../Heatmap%20Decorator/readme.md)
-* [Particle Effect (Snow & Rain)](../Snow%20and%20Rain%20Particle%20Effect/readme.md)
-* [Fire Particle Effect](../Fire%20Particle%20Effect/readme.md)
-* [Street Network Decorator](../Street%20Network%20Decorator/readme.md)
 
-## Notes
 
-* This is not a true traffic simulation. Cars can run over each other, and this is not a bug.
-* Updating street data re-queries OSM with the current extents of the viewport and creates a new decorator with the results. A red box is drawn around the new area that contains street data.
-* Changing car density provides a way to modify the number of particles. This number comes from the total distance available on each street and the density value. To mitigate performance issues, the number of cars maxes out at 9000.
-* Switching between the left side and right side determines which side of the street cars drive on. Note that OSM will return some major streets (like highways and interstates) as two separate streets instead of a single street. This toggle won't change the driving direction of such streets
-* When in `streets only` mode, the background map is set to the OpenStreetMap street view map, otherwise it's set to Bing's hybrid map.
+## 🛠 Tools and Frameworks  
 
-## Copyright Disclaimer
+### Software Tools:  
+- **React.js & TypeScript**: Dynamic and modular UI development.  
+- **Tailwind CSS**: Customizable styling for a seamless user experience.  
+- **Recharts**: Responsive visualizations for traffic and emissions data.  
+- **Bentley iTwin Platform**: 3D/4D modeling for simulation and analysis.  
 
-Copyright © Bentley Systems, Incorporated, © OpenStreetMap contributors. Particle Effect - Car. All rights reserved.
+### Data Sources:  
+- Mock datasets for vehicles, emissions, and road networks sourced via OpenStreetMap APIs.  
+- JSON/CSV data formats aligned with Bentley’s default global coordinate system.  
 
-This sample shows how to create a particle effect using OpenStreetMaps to populate a network of roads and streets with moving cars.
+---
 
-This sample uses the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) distributed and created by [OpenStreetMap](https://www.openstreetmap.org/) (OSM). The data retrieved from this API is made available under the Open Database License.
+## ⚙️ Installation  
 
-For more information about OSM and licensing, see their [licensing page](https://www.openstreetmap.org/copyright).
+### Prerequisites  
+- **Node.js**: Install via [Node.js Package Manager](https://nodejs.org/en/download/package-manager).  
 
-Map tiles are also pulled from OpenStreetMap. Find more information about OSM map tiles [here](https://wiki.openstreetmap.org/wiki/Tiles).
+### Step-by-Step Setup  
 
-Additionally, the truck images in this sample come from [Istock Photo](https://www.istockphoto.com/search/more-like-this/1415230916?assettype=image%2Cfilm&mediatype=illustration&phrase=truck%20top%20view) and are in the public domain.
+#### Clone the Repository  
+```bash
+git clone https://github.com/AlexandruRO45/PTEMO.git
+cd PTEMO
+```
+
+#### Set Up Packages Dependencies
+```bash
+npm install
+```
+ 
+#### Set Up Environment Variables  
+1. Create a `.env` file in the root directory.  
+2. Copy and configure the following variables:  
+
+```dotenv
+# ---- Authorization Client Settings ----
+# Follow this tutorial on web service deployment available on Bentley iTwin platform: https://developer.bentley.com/tutorials/web-application-quick-start/
+IMJS_AUTH_CLIENT_CLIENT_ID=
+IMJS_AUTH_CLIENT_REDIRECT_URI=
+IMJS_AUTH_CLIENT_LOGOUT_URI=
+IMJS_AUTH_CLIENT_SCOPES=
+IMJS_AUTH_AUTHORITY="https://ims.bentley.com"
+
+# ---- Test IDs ----
+# Taken directly from 'My iTwins tab'. For this project, select the template iModel called Stadium for full support.
+IMJS_ITWIN_ID=
+IMJS_IMODEL_ID=
+
+# ---- Map Settings ----
+# API key for Azure service: https://learn.microsoft.com/en-us/azure/azure-maps/quick-demo-map-app
+# Access token for Map Box service: https://docs.mapbox.com/help/getting-started/access-tokens
+# Access token for Cesium service: https://cesium.com/learn/ion/cesium-ion-access-tokens
+IMJS_AZURE_MAPS_KEY=
+IMJS_MAP_BOX_KEY=
+IMJS_CESIUM_ION_KEY=
+
+# Advanced CRA Config
+# Advanced CRA Config: https://create-react-app.dev/docs/advanced-configuration/
+# Advanced iTwin.js CRA Config: https://github.com/imodeljs/create-react-app/blob/imodeljs/packages/react-scripts/README-imodeljs.md
+SKIP_PREFLIGHT_CHECK=true
+USE_FAST_SASS=true
+USE_FULL_SOURCEMAP=true
+TRANSPILE_DEPS=false
+USING_NPM=true
+```  
+
+#### Build and Serve the Application  
+
+1. Build the project:  
+   ```bash
+   npm run build
+   ```  
+2. Serve the application locally (install `serve` if prompted):  
+   ```bash
+   npm install -g serve
+   serve -s build
+   ```  
+3. Access the application via:  
+   - Local: `http://localhost:3000`  
+   - Network: `http://<network-ip>:3000`  
+
+---
+
+## 📊 Results and Impact  
+
+- **Simulation Insights**: Pinpointed emissions hotspots and inefficiencies via heatmaps.  
+- **Scalability**: Demonstrated a replicable model for other transport hubs.  
+- **Sustainability**: Supported TransiT’s mission to decarbonize UK logistics.  
+
+
+
+## 📝 Notes  
+- Mock data was used; future iterations aim for real-time data integration.  
+- Current limitations include capped vehicle counts and simulation fidelity dependent on OSM data.  
+
+---
+
+## 📜 License and Copyright  
+
+This project is licensed under the Apache License 2.0. See the LICENSE file for more details.  
+
+### Copyright Disclaimer  
+- Copyright © Bentley Systems, Incorporated.  
+- © OpenStreetMap contributors.  
+
+This project uses OpenStreetMaps and the Overpass API under the Open Database License.  
+
+**More Information:**  
+- [OSM Licensing](https://www.openstreetmap.org/copyright)  
+- [OSM Map Tiles](https://wiki.openstreetmap.org/wiki/Tile_usage_policy)  
+
+---
+
+## 💡 Acknowledgments  
+This project was completed as part of the **TransiT Initiative**, a collaborative effort aimed at leveraging digital twin technologies to decarbonize UK transport infrastructure. I am deeply grateful to my supervisors, **Dr. Daniel Mitchell** and **Prof. David Flynn**, for their guidance and for providing this opportunity to develop PTEMO as my Master’s dissertation project.  
+
+Special thanks to **Bentley Systems** for enabling this work with their innovative iTwin platform and to the wider TransiT team for their invaluable feedback and resources. This research underscores the critical role of digital twins in modernizing logistics and contributing to sustainable operations.
+
+---
+
+<div align="center">
+    <i>Empowering smarter, greener logistics with PTEMO 🚢</i>
+</div>
