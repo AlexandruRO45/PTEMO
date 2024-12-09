@@ -89,6 +89,7 @@ npm install
 
 ```dotenv
 # ---- Authorization Client Settings ----
+# Follow this tutorial on web service deployment available on Bentley iTwin platform: https://developer.bentley.com/tutorials/web-application-quick-start/
 IMJS_AUTH_CLIENT_CLIENT_ID=
 IMJS_AUTH_CLIENT_REDIRECT_URI=
 IMJS_AUTH_CLIENT_LOGOUT_URI=
@@ -96,15 +97,21 @@ IMJS_AUTH_CLIENT_SCOPES=
 IMJS_AUTH_AUTHORITY="https://ims.bentley.com"
 
 # ---- Test IDs ----
+# Taken directly from 'My iTwins tab'. For this project, select the template iModel called Stadium for full support.
 IMJS_ITWIN_ID=
 IMJS_IMODEL_ID=
 
 # ---- Map Settings ----
+# API key for Azure service: https://learn.microsoft.com/en-us/azure/azure-maps/quick-demo-map-app
+# Access token for Map Box service: https://docs.mapbox.com/help/getting-started/access-tokens
+# Access token for Cesium service: https://cesium.com/learn/ion/cesium-ion-access-tokens
 IMJS_AZURE_MAPS_KEY=
 IMJS_MAP_BOX_KEY=
 IMJS_CESIUM_ION_KEY=
 
 # Advanced CRA Config
+# Advanced CRA Config: https://create-react-app.dev/docs/advanced-configuration/
+# Advanced iTwin.js CRA Config: https://github.com/imodeljs/create-react-app/blob/imodeljs/packages/react-scripts/README-imodeljs.md
 SKIP_PREFLIGHT_CHECK=true
 USE_FAST_SASS=true
 USE_FULL_SOURCEMAP=true
