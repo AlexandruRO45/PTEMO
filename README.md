@@ -1,50 +1,167 @@
-# Port Traffic Emissions Management and Optimization (PTEMO) - Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform
+# Port Traffic Emissions Management and Optimization (PTEMO)  
+## Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform  
 
-## Purpose
+### Purpose  
+The purpose of this project is to demonstrate the following:  
+- Using Bentley iTwin for scalable digital twin creation.  
+- Simulating traffic flow and emissions hotspots in constrained port environments.  
+- Developing an interactive user interface (UI) for scenario-based operational analysis.  
 
-The purpose of this sample is to demonstrate the following:
+---
 
-* Working with an external API to generate particles for a decorator
-* Creating a decorator and rendering it in the active view.
-* Visualizing cars moving along a network of roads.
+### Key Features  
 
-## Description
+#### Dashboards for Traffic Monitoring and Emissions Analytics  
+- **Emissions Dashboard**: Real-time emissions insights with cumulative area charts and time-based filters.  
+- **Data Analytics**: Comprehensive metrics on idle times, vehicle density, and zone-specific emissions.  
 
-In this sample, particles move along a complex road network created from OpenStreetMap data. This road network is generated using two methods from the [OverpassApi](./open-street-map/OverpassApi.ts) class. The first method requests OSM street data within the bounds of the viewport and constructs streets and intersections. The second rebuilds the existing network with a new driving direction. Note: there should only be one instance of OverpassApi data in the app.
+#### Interactive Tools for Real-Time Operations  
+- **InteractiveMap**: Visualizes the Port of Dover's road network with zooming, filtering, and simulation toggling.  
+- **VehicleTrackingPanel**: Tracks vehicle status, emissions, and exportable operational data.  
+- **SimulationControlPanel**: Scenario-based controls for simulations with dynamic playback options.  
 
-These particles are built and rendered using the [Decorator](https://www.itwinjs.org/reference/core-frontend/views/decorator/) and [ParticleCollectionBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/particlecollectionbuilder/) interfaces. The `decorate` method in the decorator updates the location and directions of existing particles and adds them to a new `ParticleCollectionBuilder`. Then it uses a [GraphicBuilder](https://www.itwinjs.org/reference/core-frontend/rendering/graphicbuilder/) to draw a rectangle around the area that may contain particles. Lastly, this method adds the [RenderGraphics](https://www.itwinjs.org/reference/core-frontend/rendering/rendergraphic/) produced by these builders to the [DecorateContext](https://www.itwinjs.org/reference/core-frontend/rendering/decoratecontext) so that they are rendered.
+---
 
-To help with memory management, particle textures are owned by the decorator, which contains a `dispose()` method that needs to be called before a decorator is destroyed.
+### Tools and Frameworks  
 
-The `createDecorator` method in [CarDecorationApi.ts]("./CarDecorationApi.ts") is responsible for disposing the existing car decorator and creating a new decorator. It adds an event listener to the [Viewport.onRender](https://www.itwinjs.org/reference/core-frontend/views/viewport/?term=onrender#onrender) method to re-render the decorator on every frame and passes the new decorator to the [ViewManager.addDecorator](https://www.itwinjs.org/reference/core-frontend/views/viewmanager/adddecorator/) method to have it rendered in all active views. Note that this method updates `CarDecorationApi.dispose()` to be tied to the new decorator.
+#### Software Tools:  
+- **React.js & TypeScript**: Interactive UI development.  
+- **Tailwind CSS**: Rapid, customizable styling for UI components.  
+- **Recharts**: Dynamic, responsive data visualizations.  
+- **Bentley iTwin Platform**: Cloud-based 3D/4D modeling for traffic flow simulation and emissions tracking.  
 
-## Additional Resources
+#### Data Sources:  
+- Mock datasets for vehicle counts, emissions, and traffic patterns derived from OpenStreetMap (OSM) APIs.  
+- JSON/CSV formats with Bentley's default global coordinate system for accurate geospatial alignment.  
 
-For more examples of decorators, see these samples:
+---
 
-* [Heatmap Decorator Sample](../Heatmap%20Decorator/readme.md)
-* [Particle Effect (Snow & Rain)](../Snow%20and%20Rain%20Particle%20Effect/readme.md)
-* [Fire Particle Effect](../Fire%20Particle%20Effect/readme.md)
-* [Street Network Decorator](../Street%20Network%20Decorator/readme.md)
+### Installation  
 
-## Notes
+#### Prerequisites  
+- **Node.js**: Install Node.js on your local system by following the instructions for your OS:  
+  [https://nodejs.org/en/download/package-manager](https://nodejs.org/en/download/package-manager)  
 
-* This is not a true traffic simulation. Cars can run over each other, and this is not a bug.
-* Updating street data re-queries OSM with the current extents of the viewport and creates a new decorator with the results. A red box is drawn around the new area that contains street data.
-* Changing car density provides a way to modify the number of particles. This number comes from the total distance available on each street and the density value. To mitigate performance issues, the number of cars maxes out at 9000.
-* Switching between the left side and right side determines which side of the street cars drive on. Note that OSM will return some major streets (like highways and interstates) as two separate streets instead of a single street. This toggle won't change the driving direction of such streets
-* When in `streets only` mode, the background map is set to the OpenStreetMap street view map, otherwise it's set to Bing's hybrid map.
+#### Clone the Repository  
+```bash
+git clone <repository-url>
+cd <repository-directory>
+npm install
+```  
 
-## Copyright Disclaimer
+#### Set Up Environment Variables  
+1. Create a `.env` file in the root directory.  
+2. Add the following environment variables to the `.env` file:  
 
-Copyright © Bentley Systems, Incorporated, © OpenStreetMap contributors. Particle Effect - Car. All rights reserved.
+```dotenv
+# ---- Authorization Client Settings ----
+# Follow this tutorial on web service deployment available on Bentley iTwin platform: https://developer.bentley.com/tutorials/web-application-quick-start/
+# The IMJS_AUTH_AUTHORITY always stays the same
+IMJS_AUTH_CLIENT_CLIENT_ID=
+IMJS_AUTH_CLIENT_REDIRECT_URI=
+IMJS_AUTH_CLIENT_LOGOUT_URI=
+IMJS_AUTH_CLIENT_SCOPES=
+IMJS_AUTH_AUTHORITY="https://ims.bentley.com"
 
-This sample shows how to create a particle effect using OpenStreetMaps to populate a network of roads and streets with moving cars.
+# ---- Test IDs ----
+# Taken directly from 'My iTwins tab'. For this project, select the template iModel called Stadium for full support.
+IMJS_ITWIN_ID=
+IMJS_IMODEL_ID=
 
-This sample uses the [Overpass API](https://wiki.openstreetmap.org/wiki/Overpass_API) distributed and created by [OpenStreetMap](https://www.openstreetmap.org/) (OSM). The data retrieved from this API is made available under the Open Database License.
+# ---- Map Settings ----
+# API key for Azure service: https://learn.microsoft.com/en-us/azure/azure-maps/quick-demo-map-app
+IMJS_AZURE_MAPS_KEY=
 
-For more information about OSM and licensing, see their [licensing page](https://www.openstreetmap.org/copyright).
+# Access token for Map Box service: https://docs.mapbox.com/help/getting-started/access-tokens
+IMJS_MAP_BOX_KEY=
 
-Map tiles are also pulled from OpenStreetMap. Find more information about OSM map tiles [here](https://wiki.openstreetmap.org/wiki/Tiles).
+# Access token for Cesium service: https://cesium.com/learn/ion/cesium-ion-access-tokens
+IMJS_CESIUM_ION_KEY=
 
-Additionally, the truck images in this sample come from [Istock Photo](https://www.istockphoto.com/search/more-like-this/1415230916?assettype=image%2Cfilm&mediatype=illustration&phrase=truck%20top%20view) and are in the public domain.
+# Advanced CRA Config: https://create-react-app.dev/docs/advanced-configuration/
+SKIP_PREFLIGHT_CHECK=true
+
+# Advanced iTwin.js CRA Config: https://github.com/imodeljs/create-react-app/blob/imodeljs/packages/react-scripts/README-imodeljs.md
+USE_FAST_SASS=true
+USE_FULL_SOURCEMAP=true
+TRANSPILE_DEPS=false
+
+# Remove the following env var if using a different package manager
+USING_NPM=true
+```  
+
+#### Build the Project  
+Run the following command to build the application:  
+```bash
+npm run build
+```  
+If successful, the output will include a summary like:  
+```plaintext
+Compiled successfully.
+File sizes after gzip:
+1.8 MB     build/static/js/main.c0aa29c6.js
+...
+The build folder is ready to be deployed.
+```
+
+#### Serve the Application Locally  
+1. If prompted to install `serve`, run this command (one-time setup):  
+   ```bash
+   npm install -g serve
+   ```  
+2. To start the server, run:  
+   ```bash
+   serve -s build
+   ```  
+3. Access the application via:  
+   - **Local**: `http://localhost:3000`  
+   - **Network**: Based on your network configuration (e.g., `http://<network-ip>:3000`).  
+
+---
+
+#### Example Output on Successful Local Deployment  
+```plaintext
+┌────────────────────────────────────────────┐
+│                                            │
+│   Serving!                                 │
+│                                            │
+│   - Local:    http://localhost:3000        │
+│   - Network:  http://172.29.204.167:3000   │
+│                                            │
+│   Copied local address to clipboard!       │
+│                                            │
+└────────────────────────────────────────────┘
+```  
+
+Now you're all set to explore the Port Traffic Emissions Management and Optimization (PTEMO) application!
+
+
+---
+
+### Notes  
+1. Mock data was used; future iterations aim for real-time data integration.  
+2. Current limitations include non-functional traffic collisions and maximum particle counts (9,000 vehicles).  
+3. Simulation fidelity constrained by OSM data and initial MVP focus on UI development.
+
+---
+
+### Acknowledgments  
+This project contributes to the TransiT initiative for decarbonizing UK transport networks, using cutting-edge digital twin technologies to improve sustainability and operational efficiency.
+
+---
+
+### License  
+This project is licensed under the Apache License 2.0. See the LICENSE file for more details.  
+
+---
+
+### Copyright Disclaimer  
+- **Copyright © Bentley Systems, Incorporated**  
+- **© OpenStreetMap contributors**  
+
+This project uses OpenStreetMaps and the Overpass API under the Open Database License.  
+
+**More information:**  
+- [OSM Licensing](https://www.openstreetmap.org/copyright)  
+- [OSM Map Tiles](https://wiki.openstreetmap.org/wiki/Tile_usage_policy)  
+  
