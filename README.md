@@ -74,11 +74,15 @@ This project harnesses the power of **digital twins** to revolutionize logistics
 
 #### Clone the Repository  
 ```bash
-git clone <repository-url>
-cd <repository-directory>
-npm install
- 
+git clone https://github.com/AlexandruRO45/PTEMO.git
+cd PTEMO
+```
 
+#### Set Up Packages Dependencies
+```bash
+npm install
+```
+ 
 #### Set Up Environment Variables  
 1. Create a `.env` file in the root directory.  
 2. Copy and configure the following variables:  
