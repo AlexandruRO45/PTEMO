@@ -6,24 +6,19 @@
     <div id="badges">
         <!-- GitHub Badges -->
         <a href="https://github.com/AlexandruRO45/PTEMO/releases">
-            <img src="https://img.shields.io/github/v/release/AlexandruRO45/PTEMO?color=blue&label=Latest%20Release" alt="Latest Release Badge"/>
-        </a>
+            <img src="https://img.shields.io/github/v/release/AlexandruRO45/PTEMO?color=blue&label=Latest%20Release" alt="Latest Release Badge"/></a>
         <a href="https://github.com/AlexandruRO45/PTEMO/issues">
-            <img src="https://img.shields.io/github/issues/AlexandruRO45/PTEMO.svg" alt="Issues Badge"/>
-        </a>
+            <img src="https://img.shields.io/github/issues/AlexandruRO45/PTEMO.svg" alt="Issues Badge"/></a>
         <a href="https://github.com/AlexandruRO45/PTEMO/pulls">
-            <img src="https://img.shields.io/github/issues-pr/AlexandruRO45/PTEMO.svg" alt="Pull Requests Badge"/>
-        </a>
+            <img src="https://img.shields.io/github/issues-pr/AlexandruRO45/PTEMO.svg" alt="Pull Requests Badge"/></a>
     </div>
     <div id="badges">
         <!-- External Website Badge -->
         <a href="https://transit.ac.uk/">
-            <img src="https://img.shields.io/badge/Website-TransiT-blue" alt="TransiT Website Badge"/>
-        </a>
+            <img src="https://img.shields.io/badge/Website-TransiT-blue" alt="TransiT Website Badge"/></a>
         <!-- YouTube Presentation Badge -->
         <a href="https://youtube.com/your-video-link">
-            <img src="https://img.shields.io/badge/Watch-YouTube-red" alt="YouTube Presentation Badge"/>
-        </a>
+            <img src="https://img.shields.io/badge/Watch-YouTube-red" alt="YouTube Presentation Badge"/></a>
     </div>
 </div>
 
