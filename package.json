@@ -7,7 +7,7 @@
     "@bentley/react-scripts": "^5.0.4",
     "@itwin/appui-abstract": "^4.4.2",
     "@itwin/appui-layout-react": "^4.8.3",
-    "@itwin/appui-react": "^4.9.0",
+
     "@itwin/browser-authorization": "^1.1.0",
     "@itwin/clash-detection-client": "^0.2.2",
     "@itwin/components-react": "^4.9.0",
