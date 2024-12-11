@@ -29,6 +29,9 @@
 **Welcome to PTEMO!**  
 This project harnesses the power of **digital twins** to revolutionize logistics and emissions management at one of the UK’s busiest transport hubs, the Port of Dover.  
 
+> [!NOTE]
+> **Local Installation Recommended**: The Vercel app deployment is currently non-functional. To ensure the full functionality of the PTEMO platform, please follow the [installation instructions](https://github.com/AlexandruRO45/PTEMO?tab=readme-ov-file#%EF%B8%8F-installation) below to run the application locally. A branch/pull request is open to resolve this issue in future developments.
+
 ---
 
 ## 🌟 Purpose  
