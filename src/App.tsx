@@ -3,8 +3,6 @@
  * See LICENSE.md in the project root for license terms and full copyright notice.
  *--------------------------------------------------------------------------------------------*/
 
-import "./App.scss";
-
 import type { ScreenViewport } from "@itwin/core-frontend";
 import { FitViewTool, IModelApp, StandardViewId } from "@itwin/core-frontend";
 import { FillCentered } from "@itwin/core-react";
@@ -36,10 +34,13 @@ import {
 } from "@itwin/web-viewer-react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import "./App.scss";
 import { Auth } from "./Auth";
 import { history } from "./history";
 import { getSchemaContext, unifiedSelectionStorage } from "./selectionStorage";
 
+
+ 
 const App: React.FC = () => {
   const [iModelId, setIModelId] = useState(process.env.IMJS_IMODEL_ID);
   const [iTwinId, setITwinId] = useState(process.env.IMJS_ITWIN_ID);
