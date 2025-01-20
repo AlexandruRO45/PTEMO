@@ -17,14 +17,14 @@
         <a href="https://transit.ac.uk/">
             <img src="https://img.shields.io/badge/Website-TransiT-blue" alt="TransiT Website Badge"/></a>
         <!-- YouTube Presentation Badge -->
-        <a href="https://youtube.com/your-video-link">
+        <a href="https://www.youtube.com/@SmartSystemsGroup_UoG">
             <img src="https://img.shields.io/badge/Watch-YouTube-red" alt="YouTube Presentation Badge"/></a>
     </div>
 </div>
 
 ---
 
-# Port Traffic Emissions Management and Optimization (PTEMO)  Digital Twin Visualization and Logistics for the Port of Dover Using Bentley iTwin Platform  
+# Port Traffic Emissions Management and Optimization: A Digital Twin Approach for Road-Freight Using Bentley iTwin Platform  
 
 **Welcome to PTEMO!**  
 This project harnesses the power of **digital twins** to revolutionize logistics and emissions management at one of the UK’s busiest transport hubs, the Port of Dover.  
