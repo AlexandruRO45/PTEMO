@@ -17,7 +17,7 @@
         <a href="https://transit.ac.uk/">
             <img src="https://img.shields.io/badge/Website-TransiT-blue" alt="TransiT Website Badge"/></a>
         <!-- YouTube Presentation Badge -->
-        <a href="https://www.youtube.com/@SmartSystemsGroup_UoG">
+        <a href="https://www.youtube.com/watch?v=WvtDdjjWrv4">
             <img src="https://img.shields.io/badge/Watch-YouTube-red" alt="YouTube Presentation Badge"/></a>
     </div>
 </div>
